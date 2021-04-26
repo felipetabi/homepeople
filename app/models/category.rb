@@ -10,5 +10,5 @@
 class Category < ApplicationRecord
     validates :name, presence: true
 
-    belongs_to :service
+    has_many :service
 end
