@@ -1,1 +1,34 @@
-<h1> en servicios<h1>
+
+<div class="col-md-12 text-center">
+  <h2>Servicio</h2>
+</div>
+
+<div class="col-md-4 offset-md-4">
+  <%= form_for :post do |f| %>
+    
+
+    <div class="mb-3">
+      <%= f.label :title, class:"form-label" %>
+      <%= f.text_field :title, autofocus: true, autocomplete: "title", class:"form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :description, class:"form-label"  %>
+      <%= f.text_area :description, class:"form-control" %>
+    </div>
+    
+
+    <div class="mb-3">
+      <%= f.label :region, class:"form-label" %>
+      <%= f.text_field :region, autofocus: true, autocomplete: "title", class:"form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Ingresar Servicio", class:"btn btn-primary" %>
+    </div>
+  <% end %>
+
+  
+</div>
+
+

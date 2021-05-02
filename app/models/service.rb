@@ -4,5 +4,6 @@ class Service < ApplicationRecord
     belongs_to :user
 
     belongs_to :category
-    has_many :schedule
+    has_many :schedules
+    
 end
