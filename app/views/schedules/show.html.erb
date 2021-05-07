@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date time:</strong>
+  <%= @schedule.date_time %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @schedule.price %>
+</p>
+
+<p>
+  <strong>Is closed:</strong>
+  <%= @schedule.is_closed %>
+</p>
+
+<%= link_to 'Edit', edit_schedule_path(@schedule) %> |
+<%= link_to 'Back', schedules_path %>

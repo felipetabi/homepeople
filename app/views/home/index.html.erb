@@ -7,6 +7,12 @@
 <% if !user_signed_in? %>
       <%= link_to 'Login', new_user_session_path, class:"waves-effect waves-light btn-large"%>
       <%= link_to 'Registro', new_user_registration_path, class:"waves-effect waves-light btn-large"%>
+      
 <% else %>
       <%= link_to('Logout', destroy_user_session_path, class:"waves-effect waves-light btn-large", method: :delete) %>       
 <% end %>
+<% if user_signed_in? && current_user.photo.attached? %>
+      <%= image_tag url_for(current_user.photo) %>
+<% end %>
+
+<%= link_to "Crear servicio", "/services/new" %>
