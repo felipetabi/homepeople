@@ -3,10 +3,21 @@
   <h2>Servicio</h2>
 </div>
 
-<div class="col-md-4 offset-md-4">
-  <%= form_with model: @photo do |form| %>
 
-    <% hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="col-md-4 offset-md-4">
+   <%= form_for @service do |f| %>
+
+   <% if @service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+      <ul>
+        <% @service.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
     <div class="mb-3">
       <%= f.label :title, class:"form-label" %>
@@ -24,10 +35,22 @@
       <%= f.text_field :region, autofocus: true, autocomplete: "title", class:"form-control" %>
     </div>
 
+    <div class="mb-3">
+      <%= f.label :category, class:"form-label" %>
+      <%= f.select(:category_id, @categories.map{|category| [category.name, category.id]}) %>
+    </div>
+        
+    
+    <div>
+        <%= f.file_field :certificates, multiple: true ,class:"form-label" %>
+    </div>
+
     <div class="actions">
       <%= f.submit "Ingresar Servicio", class:"btn btn-primary" %>
     </div>
+  
   <% end %>
+
 
   
 </div>
