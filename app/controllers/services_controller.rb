@@ -1,6 +1,8 @@
 class ServicesController < ApplicationController
     before_action :authenticate_user!
 
+    
+
     def index
         @categories = Category.all
         @service = current_user.service || current_user.build_service
@@ -16,7 +18,11 @@ class ServicesController < ApplicationController
         else
             render :index, status: :unprocessable_entity
         end
+        if current_user.role == 0
+            current_user.update(role: 1)
+        end
     end
+    
 
     def update
         @categories = Category.all
