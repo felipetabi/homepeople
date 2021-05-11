@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user! 
+      
 
     
-
     def index
         @categories = Category.all
         @service = current_user.service || current_user.build_service
