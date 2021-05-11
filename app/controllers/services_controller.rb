@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
     before_action :authenticate_user!
 
-    
+
 
     def index
         @categories = Category.all
@@ -18,11 +18,8 @@ class ServicesController < ApplicationController
         else
             render :index, status: :unprocessable_entity
         end
-        if current_user.role == 0
-            current_user.update(role: 1)
-        end
     end
-    
+
 
     def update
         @categories = Category.all
@@ -40,7 +37,7 @@ class ServicesController < ApplicationController
     def set_service
         @service = Service.find(params[:id])
     end
-    
+
     def service_params
         params.require(:service).permit(:title, :description, :region, :comuna, :category_id, certificates: [])
     end
