@@ -8,7 +8,11 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
+    has_many :service
+
+
+
     validates :name, presence: true
 
-    has_many :service
+    
 end
