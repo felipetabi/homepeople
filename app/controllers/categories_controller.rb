@@ -1,7 +1,6 @@
 class CategoriesController < ApplicationController
-    before_action :authenticate_user! do 
-        if current_user.role != 2
-            redirect_to services_path
+    before_action :authenticate_user!
+    before_action :is_admin?
         end
     end
       
