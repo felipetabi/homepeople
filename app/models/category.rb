@@ -9,10 +9,6 @@
 #
 class Category < ApplicationRecord
     has_many :service
-
-
-
     validates :name, presence: true
-
     
 end
