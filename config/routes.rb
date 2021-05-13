@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   resources :schedules
   get "categories/index"
+  get "search/index"
 
   resources :services
   resources :categories
+  
   
   
   devise_for :users
