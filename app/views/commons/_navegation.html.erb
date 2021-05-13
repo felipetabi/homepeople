@@ -13,6 +13,9 @@
           <li class="nav-item">
             <%= link_to 'Registro', new_user_registration_path, class:"nav-link"%>
           </li>
+          <li class="nav-item">
+          <%= link_to 'Buscar Servicio', "/search/index", class:"nav-link"%>
+          </li>
         <% else %>
           <li class="nav-item">
             <%= link_to('Logout', destroy_user_session_path, class:"nav-link", method: :delete) %>        
