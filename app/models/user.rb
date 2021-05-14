@@ -30,4 +30,5 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   has_one :service
+  has_many :bookings, foreign_key: "client_id"
 end
