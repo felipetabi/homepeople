@@ -4,7 +4,7 @@ class CreateBookings < ActiveRecord::Migration[6.1]
       t.integer :client_id, null: false, foreign_key: true
       t.references :schedule, null: false, foreign_key: true
       
-      t.interger :status, default: 2
+      t.integer :status, default: 2
       t.timestamps
     end
   end
