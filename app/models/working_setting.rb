@@ -1,8 +1,10 @@
 class WorkingSetting < ApplicationRecord
   belongs_to :user
 
+
   before_create :remove_empty_string, :create_schedules
   before_update :remove_empty_string, :update_schedules
+
 
   def remove_empty_string
     self.array_days.compact_blank
@@ -24,9 +26,9 @@ class WorkingSetting < ApplicationRecord
   end
 
   def update_schedules
-
+    self.user.service.schedules.left_outer_joins(:bookings).destroy_all
+    create_schedules
   end
-
 
 
   def return_integer_day(day)

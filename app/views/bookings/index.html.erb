@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Mis reservas</h1>
+  </div>
+  <div class="col-md-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Estado de la reserva</th>
+          <th scope="col">Servicio</th>
+          <th scope="col">Descripción del Servicio</th>
+          <th scope="col"> Región del Servicio</th>
+          <th scope="col"> Comuna del Servicio</th>
+          <th scope="col"> Precio del Servicio</th>
+          <th scope="col"> Fecha y hora tomada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @my_bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.status %></td>
+            <td><%= booking.schedule.service.title %></td>
+            <td><%= booking.schedule.service.description %></td>
+            <td><%= booking.schedule.service.region %></td>
+            <td><%= booking.schedule.service.comuna %></td>
+            <td><%= booking.schedule.price %></td>
+            <td><%= booking.schedule.day.strftime("%D") %> - <%= booking.schedule.hour %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
