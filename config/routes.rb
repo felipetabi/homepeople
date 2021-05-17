@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
-  
-
-  resources :schedules
-  get "categories/index"
-
+  root to: "home#index"
+  devise_for :users
   resources :services
   resources :categories
-  
-  
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "home#index"
+  resources :working_settings, only: [:create, :update]
+  resources :schedules do
+    collection do
+      post "create-calendar", as: :create_calendar
+    end
+  end
+  get "search", to: "search#index"
+
 end

@@ -1,9 +1,10 @@
 class SchedulesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_schedule, only: %i[ show edit update destroy ]
 
   # GET /schedules or /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = current_user.service.schedules
   end
 
   # GET /schedules/1 or /schedules/1.json

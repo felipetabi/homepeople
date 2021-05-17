@@ -29,5 +29,7 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
-  has_one :service
+  has_one :service, dependent: :destroy
+  has_one :working_setting, dependent: :destroy
+  has_many :bookings, foreign_key: "client_id"
 end

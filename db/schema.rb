@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_29_215742) do
+ActiveRecord::Schema.define(version: 2021_05_16_045051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2021_04_29_215742) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.integer "client_id", null: false
+    t.bigint "schedule_id", null: false
+    t.integer "status", default: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["schedule_id"], name: "index_bookings_on_schedule_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -50,12 +59,13 @@ ActiveRecord::Schema.define(version: 2021_04_29_215742) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.datetime "date_time"
     t.integer "price"
     t.boolean "is_closed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "service_id", null: false
+    t.date "day"
+    t.string "hour"
     t.index ["service_id"], name: "index_schedules_on_service_id"
   end
 
@@ -94,8 +104,21 @@ ActiveRecord::Schema.define(version: 2021_04_29_215742) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "working_settings", force: :cascade do |t|
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.string "array_hours", null: false, array: true
+    t.string "array_days", null: false, array: true
+    t.integer "hour_price", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_working_settings_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "schedules"
   add_foreign_key "schedules", "services"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "users"
