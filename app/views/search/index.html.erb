@@ -1,20 +1,17 @@
-<%= form_with(url: search_index_path, method: :get,   
-    class: 'navbar-form navbar-left') do |f| %>  
-  <div class="input-group">  
-    
+<%= form_with(url: search_path, method: :get, class: 'navbar-form navbar-left') do |f| %>
+  <div class="input-group">
     <%= f.search_field :region, value: params[:region], placeholder: "Región" %>
     <%= f.search_field :comuna, value: params[:comuna], placeholder: "Comuna" %> 
     <%= f.label :category, class:"form-label" %>
     <%= f.select(:category_id, @categories.map{|category| [category.name, category.id]}) %>
-    <div class="input-group-btn">  
-      <%= button_tag "Buscar servicio", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
-    </div>  
-  </div>  
+    <div class="input-group-btn">
+      <%= button_tag "Buscar servicio", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>
+    </div>
+  </div>
 <% end %>
 
 <% @services.each do |service| %>
   <%= service.region %>
   <%= service.comuna %>
   <%= service.category.name %>
-
 <% end %>
