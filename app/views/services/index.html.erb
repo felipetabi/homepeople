@@ -29,16 +29,19 @@
       <%= f.text_area :description, class:"form-control" %>
     </div>
 
-
-    <div class="mb-3">
+  
+    
+    <div class="mb-3" data-controller="service">
       <%= f.label :region, class:"form-label" %>
-      <%= f.text_field :region, autofocus: true, autocomplete: "title", class:"form-control" %>
-    </div>
-     <div class="mb-3">
+      <%= f.select :region, @cities.map{|key, value| [value, key]}, {:prompt => "--select county--"}, data: {action: "click->service#funcion"} %>
+    <br>
       <%= f.label :comuna, class:"form-label" %>
-      <%= f.text_field :comuna, autofocus: true, autocomplete: "title", class:"form-control" %>
+      <%= f.select :comuna, @comunas, {:prompt => "--select comuna--"}  %>
+        
+     
     </div>
 
+  
     <div class="mb-3">
       <%= f.label :category, class:"form-label" %>
       <%= f.select(:category_id, @categories.map{|category| [category.name, category.id]}) %>
