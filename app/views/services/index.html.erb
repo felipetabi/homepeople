@@ -30,17 +30,17 @@
     </div>
 
   
-    <%= form_with url: services_path do |f| %>
+    
     <div class="mb-3" data-controller="service">
       <%= f.label :region, class:"form-label" %>
       <%= f.select :region, @cities.map{|key, value| [value, key]}, {:prompt => "--select county--"}, data: {action: "click->service#funcion"} %>
     <br>
       <%= f.label :comuna, class:"form-label" %>
-      <%= f.select :comuna, [], {:prompt => "--select comuna--"} %>
+      <%= f.select :comuna, @comunas, {:prompt => "--select comuna--"}  %>
         
      
     </div>
-    <% end %>
+
   
     <div class="mb-3">
       <%= f.label :category, class:"form-label" %>

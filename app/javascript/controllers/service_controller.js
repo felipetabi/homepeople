@@ -13,8 +13,8 @@ export default class extends Controller {
           type: "get",
           url: "get-cities?region="+value,
           success: function(data){
-            var select_comuna = document.getElementById("comuna");
-            var options = document.querySelectorAll('#comuna option');
+            var select_comuna = document.getElementById("service_comuna");
+            var options = document.querySelectorAll('#service_comuna option');
             options.forEach(o => o.remove());
 
             

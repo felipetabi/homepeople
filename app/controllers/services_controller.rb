@@ -9,6 +9,11 @@ class ServicesController < ApplicationController
       @current_user_have_service = Service.find_by_user_id(current_user.id)
       @working_settings = current_user.working_setting || current_user.build_working_setting
       @cities = CS.states(:cl)
+      if !current_user.service.nil?
+        @comunas = CS.cities(current_user.service.region, :cl)
+      else
+        @comunas = []
+      end
     end
 
     def get_cities
