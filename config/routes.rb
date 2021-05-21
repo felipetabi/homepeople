@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   end
   get "search", to: "search#index"
   get "get-cities", to: "search#get_cities"
+  get "get-cities", to: "service#get_cities"
 
 end
