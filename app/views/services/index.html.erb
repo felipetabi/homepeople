@@ -33,7 +33,7 @@
     
     <div class="mb-3" data-controller="service">
       <%= f.label :region, class:"form-label" %>
-      <%= f.select :region, @cities.map{|key, value| [value, key]}, {:prompt => "--select county--"}, data: {action: "click->service#funcion"} %>
+      <%= f.select :region, @cities.map{|key, value| [value, key]}, {:prompt => "Seleccione una Región"}, data: {action: "click->service#funcion"} %>
     <br>
       <%= f.label :comuna, class:"form-label" %>
       <%= f.select :comuna, @comunas, {:prompt => "--select comuna--"}  %>
