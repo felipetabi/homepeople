@@ -7,7 +7,6 @@ export default class extends Controller {
     //}
 
     funcion(e){
-      
       var value = e.target.value
       Rails.ajax({
           type: "get",
@@ -17,7 +16,6 @@ export default class extends Controller {
             var options = document.querySelectorAll('#service_comuna option');
             options.forEach(o => o.remove());
 
-            
             data.forEach(function(element){
               var option = document.createElement("option");
               option.text = element
