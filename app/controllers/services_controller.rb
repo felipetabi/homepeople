@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
       @service = current_user.service || current_user.build_service
       @current_user_have_service = Service.find_by_user_id(current_user.id)
       @working_settings = current_user.working_setting || current_user.build_working_setting
-      @cities = CS.states(:cl)
+      @cities = CS.states(:cl).map{|key, value| [value, key]}
       puts '///////////////////////////////////////////////'
       puts '///////////////////////////////////////////////'
       puts '///////////////////////////////////////////////'
