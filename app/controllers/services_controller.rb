@@ -10,14 +10,6 @@ class ServicesController < ApplicationController
       @working_settings = current_user.working_setting || current_user.build_working_setting
       @cities = CS.states(:cl).map{|key, value| [value, key]}
       if !current_user.service.id.nil?
-        puts '///////////////////////////////////////////////'
-        puts '///////////////////////////////////////////////'
-        puts '///////////////////////////////////////////////'
-        puts '///////////////////////////////////////////////'
-        puts current_user.service.nil?
-        puts current_user.service.id
-        puts '///////////////////////////////////////////////'
-        puts '///////////////////////////////////////////////'
         @comunas = CS.cities(current_user.service.region, :cl)
       else
         @comunas = []
