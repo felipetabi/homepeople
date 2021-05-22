@@ -9,16 +9,28 @@
         <li class="nav-item">
           <%= link_to "Home", root_path, class:"nav-link" %>
         </li>
+        <li class="nav-item">
+          <%= link_to 'Buscar Servicio', search_path, class:"nav-link"%>
+        </li>
         <% if !user_signed_in? %>
           <li class="nav-item">
             <%= link_to 'Registro', new_user_registration_path, class:"nav-link"%>
           </li>
           <li class="nav-item">
-          <%= link_to 'Buscar Servicio', "/search/index", class:"nav-link"%>
+            <%= link_to 'Login', new_user_session_path, class:"nav-link"%>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to('Logout', destroy_user_session_path, class:"nav-link", method: :delete) %>        
+            <%= link_to('Mis reservas', bookings_path, class:"nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Peticiones de reservas', my_services_bookings_path, class:"nav-link") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Mi Servicio', services_path, class:"btn btn-primary") %>
+          </li>
+          <li class="nav-item">
+            <%= link_to('Logout', destroy_user_session_path, class:"nav-link", method: :delete) %>
           </li>
         <% end %>
       </ul>

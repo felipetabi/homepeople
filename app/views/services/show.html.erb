@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1><%= @service.title %></h1>
+  </div>
+  <div class="col-md-12">
+    <p>
+      Precio por hora: <%= @working_settings.hour_price %>
+    </p>
+    <p>
+      <%= @service.description %>
+    </p>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <% @schedules.keys.each do |date| %>
+          <th scope="col"><%= date %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-controller="booking">
+        <% @schedules.each do |date, arr_schedules| %>
+          <td >
+            <% arr_schedules.each do |schedule| %>
+              <%= link_to "#{schedule.hour}", "#", class:"btn btn-primary", data:{ action: "booking#toggle", value: schedule.id} %> <br><br>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+</div>
+<div class="row">
+  <%= form_with url: create_reserve_bookings_path, method: :post do |f| %>
+    <%= f.hidden_field :schedule_ids %>
+    <%= f.submit "Reservar", disable_with: 'Reservando...', class:"btn btn-primary" %>
+  <% end %>
+</div>

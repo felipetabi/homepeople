@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index] do 
     collection do
      get :my_services_booking, as: :my_services
+     post :create_reserve, as: :create_reserve
     end
   end
   resources :working_settings, only: [:create, :update]
