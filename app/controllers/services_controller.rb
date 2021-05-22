@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, except: [:show]
 
 
 
@@ -14,6 +14,13 @@ class ServicesController < ApplicationController
       else
         @comunas = []
       end
+    end
+
+    def show
+      @working_settings = current_user.working_setting
+      @service = Service.find(params[:id])
+      day = DateTime.now
+      @schedules = @service.schedules.left_outer_joins(:bookings).where("day >= ? and is_closed = false", day).order(:day, :hour).group_by(&:day)
     end
 
     def get_cities

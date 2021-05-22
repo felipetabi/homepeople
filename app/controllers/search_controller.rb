@@ -1,12 +1,18 @@
 class SearchController < ApplicationController
-	
+
 	def index
 		@categories = Category.all
-		
 		query = {region: params[:region], comuna: params[:comuna], category_id: params[:category_id]}
 		@services = Service.where(query)
+		if params[:start_date]
+			start_date = params[:start_date].to_date
+			end_date = params[:end_date].empty? ? DateTime.now+7.days : params[:end_date].to_date
+			range_dates = params[:start_date]..params[:start_date]
+			@services.joins(:schedules).where(schedules: {is_closed: false, day: params[:start_date]..end_date })
+		end
 		@cities = CS.states(:cl)
 	end
+	
 
 	def get_cities
 		if params[:region]
