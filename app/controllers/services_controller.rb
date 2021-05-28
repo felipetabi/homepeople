@@ -17,8 +17,9 @@ class ServicesController < ApplicationController
     end
 
     def show
-      @working_settings = current_user.working_setting
+      
       @service = Service.find(params[:id])
+      @working_settings = @service.user.working_setting
       day = DateTime.now
       @schedules = @service.schedules.left_outer_joins(:bookings).where("day >= ? and is_closed = false", day).order(:day, :hour).group_by(&:day)
     end
