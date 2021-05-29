@@ -6,11 +6,13 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
 
       t.timestamps
 
-      t.references :booking, null: false
-
-      t.integer :sender_id
-      t.integer :receiver_id
+      
+      t.references :notificable, polymorphic: true
+      t.integer :sender_id, null: false, foreign_key:true
+      t.integer :receiver_id, null: false, foreign_key: true
 
     end    
+
+    
   end
 end

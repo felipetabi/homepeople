@@ -10,5 +10,6 @@
 class Category < ApplicationRecord
     has_many :service
     validates :name, presence: true
+    has_many :notifications, as: :notificable
     
 end

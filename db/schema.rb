@@ -63,10 +63,11 @@ ActiveRecord::Schema.define(version: 2021_05_27_012134) do
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "booking_id", null: false
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.index ["booking_id"], name: "index_notifications_on_booking_id"
+    t.string "notificable_type"
+    t.bigint "notificable_id"
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.index ["notificable_type", "notificable_id"], name: "index_notifications_on_notificable"
   end
 
   create_table "schedules", force: :cascade do |t|

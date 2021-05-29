@@ -2,6 +2,7 @@ class Service < ApplicationRecord
 
     has_many :schedules, dependent: :delete_all
     has_many_attached :certificates, dependent: :delete_all
+    has_many :notifications, as: :notificable
     belongs_to :user
     belongs_to :category
 
