@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_012134) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.boolean "state"
+    t.boolean "state", default: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
