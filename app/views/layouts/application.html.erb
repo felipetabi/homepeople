@@ -7,7 +7,7 @@
     <%= csp_meta_tag %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
@@ -17,7 +17,6 @@
     <%= render "commons/navegation" %>
     <%= render "commons/messages" %>
     <div class="container">
-      <span class="navbar-brand mb-0 h1"></span>
       <%= yield %>
     </div>
   </body>
