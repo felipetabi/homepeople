@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>
+      <%= @booking.service.title %>
+    </h2>
+    <p>
+      <%= @booking.service.description %>
+    </p>
+    
+    <ul>
+      <% @booking.schedules.each do |schedule| %>
+        <li>
+          <p>
+            Fecha: <%= schedule.day %>  - Hora: <%= schedule.day %>
+          </p>
+        </li>
+      <% end %>
+    </ul>
+    <hr>
+    <p>
+      Precio total: <%= @booking.price %>
+    </p>
+  </div>
+  <div class="col-md-6">
+    <div class="col-inside-lg decor-default">
+            <div class="chat-body">
+              <% @messages.each do |message| %>
+                <div class="answer <%= left_or_right_chat(message, current_user) %>">
+                  <div class="avatar">
+                    <%# <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name"> %>
+                    <div class="status offline"></div>
+                  </div>
+                  <div class="name"><%= message.sender.full_name %></div>
+                  <div class="text">
+                    <%= message.body %>
+                  </div>
+                  <div class="time"><%= time_ago_in_words(message.created_at) %></div>
+                </div>
+              <% end %>
+              <div class="answer-add">
+                <input placeholder="Write a message">
+              </div>
+            </div>
+          </div>
+  </div>
+
+</div>

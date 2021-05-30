@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
   def user_notification
     if user_signed_in?
       @user_notify = Notification.where(receiver_id: current_user.id, state: false)
-
-    end 
+    end
   end
 
   protected

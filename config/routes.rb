@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :services
   resources :categories
+  resources :chats, only: [:show]
   resources :bookings, only: [:index] do 
     collection do
      get :my_services_booking, as: :my_services

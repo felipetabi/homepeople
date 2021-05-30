@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_012134) do
+ActiveRecord::Schema.define(version: 2021_05_30_032953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,19 +43,50 @@ ActiveRecord::Schema.define(version: 2021_05_27_012134) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "booking_schedules", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "schedule_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_booking_schedules_on_booking_id"
+    t.index ["schedule_id"], name: "index_booking_schedules_on_schedule_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.integer "client_id", null: false
-    t.bigint "schedule_id", null: false
     t.integer "status", default: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["schedule_id"], name: "index_bookings_on_schedule_id"
+    t.float "price"
+    t.bigint "service_id", null: false
+    t.index ["service_id"], name: "index_bookings_on_service_id"
   end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "client_id", null: false
+    t.integer "service_client_id", null: false
+    t.index ["booking_id"], name: "index_chats_on_booking_id"
+    t.index ["client_id", "service_client_id"], name: "index_chats_on_client_id_and_service_client_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.text "body"
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["sender_id", "receiver_id"], name: "index_messages_on_sender_id_and_receiver_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -126,7 +157,11 @@ ActiveRecord::Schema.define(version: 2021_05_27_012134) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "bookings", "schedules"
+  add_foreign_key "booking_schedules", "bookings"
+  add_foreign_key "booking_schedules", "schedules"
+  add_foreign_key "bookings", "services"
+  add_foreign_key "chats", "bookings"
+  add_foreign_key "messages", "chats"
   add_foreign_key "schedules", "services"
   add_foreign_key "services", "categories"
   add_foreign_key "services", "users"

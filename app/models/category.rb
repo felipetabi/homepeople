@@ -9,7 +9,7 @@
 #
 class Category < ApplicationRecord
     has_many :service
+    has_many :notifications, as: :notificable, dependent: :destroy
+
     validates :name, presence: true
-    has_many :notifications, as: :notificable
-    
 end

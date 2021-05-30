@@ -1,6 +1,7 @@
 class Schedule < ApplicationRecord
-  has_many :bookings, dependent: :destroy
-  has_many :notifications, as: :notificable
+  has_one :booking_schedule
+  has_one :booking, through: :booking_schedule, dependent: :destroy
+  has_many :notifications, as: :notificable, dependent: :destroy
   belongs_to :service
 
   after_create :notification_message
@@ -21,7 +22,7 @@ class Schedule < ApplicationRecord
     hour = sprintf('%02d' ,hour) + ":00"
     DateTime.parse(now.strftime("%Y-%m-%dT#{hour}:00%z"))
   end
-  
+
   def notification_message
     current_user = self.service.user
     notify = self.notifications.create(message:"haz creado un calendario", state: false, sender_id: current_user.id, receiver_id: current_user.id)

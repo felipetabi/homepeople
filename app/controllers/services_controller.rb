@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
       @service = Service.find(params[:id])
       @working_settings = @service.user.working_setting
       day = DateTime.now
-      @schedules = @service.schedules.left_outer_joins(:bookings).where("day >= ? and is_closed = false", day).order(:day, :hour).group_by(&:day)
+      @schedules = @service.schedules.left_outer_joins(:booking).where("day >= ? and is_closed = false", day).order(:day, :hour).group_by(&:day)
     end
 
     def get_cities
