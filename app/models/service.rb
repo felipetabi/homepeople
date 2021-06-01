@@ -4,7 +4,7 @@ class Service < ApplicationRecord
     has_many_attached :certificates, dependent: :destroy
     has_many :notifications, as: :notificable, dependent: :destroy
     belongs_to :user
-    belongs_to :category
+    has_and_belongs_to_many :categories
 
 
 

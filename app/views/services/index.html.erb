@@ -29,22 +29,25 @@
       <%= f.text_area :description, class:"form-control" %>
     </div>
 
-  
-    
     <div class="mb-3" data-controller="service">
       <%= f.label :region, class:"form-label" %>
       <%= f.select :region, @cities, {:prompt => "Seleccione una Región"}, data: {action: "click->service#funcion"} %>
     <br>
       <%= f.label :comuna, class:"form-label" %>
       <%= f.select :comuna, @comunas, {:prompt => "--select comuna--"}  %>
-        
-     
     </div>
 
-  
     <div class="mb-3">
-      <%= f.label :category, class:"form-label" %>
-      <%= f.select(:category_id, @categories.map{|category| [category.name, category.id]}) %>
+      <%= f.label :categories, class:"form-label" %>
+      <%#f.select(:category_ids, @categories.map{|category| [category.name, category.id]}, multiple: true) %>
+
+      <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |block|  %>
+        <div class="form-check">
+          <%= block.label { block.check_box id: "#{block.object.name}-id" } %>
+          <%= block.label { block.object.name }  %>
+        </div>
+      <% end %>
+
     </div>
 
 

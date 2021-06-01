@@ -10,4 +10,9 @@ u = User.create(email: "admin@text.com", password: "123456789",  first_name: "Di
 u2 = User.create(email: "user@text.com", password: "123456789",  first_name: "Dinko", last_name: "Azema", birthday: (DateTime.now - 32.years), role:0, terms: true, phone: "+56975231235")
 c = Category.create(name: "Una categoría")
 
-Service.create(title: "Servicio", description: "Una descripción", region: "CO", comuna: "Coquimbo", category_id: c.id, user_id: u.id)
+c2 = Category.create(name: "Segunda categoría")
+
+service = Service.create(title: "Servicio", description: "Una descripción", region: "CO", comuna: "Coquimbo", user_id: u.id)
+
+service.categories << c
+service.categories << c2
