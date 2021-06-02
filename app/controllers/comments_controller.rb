@@ -2,8 +2,8 @@ class CommentsController <
 	before_action :authenticate_user!
 
 	def create
-    @comment = current_user.comment || current_user.build_comment
-    @comment = current_user.build_comment(comment_params)
+    
+    @comment = current_user.build_comments.new(comment_params)
 		if @comment.save
 			#redirect_to
 		else
