@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   has_many :schedules, through: :booking_schedules, dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
   has_one :chat, dependent: :destroy
+  has_one :comment, dependent: :destroy
   belongs_to :client, class_name: "User", foreign_key: "client_id"
   belongs_to :service
 
