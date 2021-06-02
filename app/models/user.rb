@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :bookings, foreign_key: "client_id", dependent: :destroy
   # has_many :client_chats, foreign_key: "client_id", dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
 
   def full_name
