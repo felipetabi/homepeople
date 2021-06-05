@@ -2,13 +2,14 @@ class CommentsController < ApplicationController
 	before_action :authenticate_user!
 
 	def create
-    
-    @comment = current_user.build_comments.new(comment_params)
-		if @comment.save
-			#redirect_to
+		booking = Booking.find(params[:booking_id])
+    	@comment = current_user.comments.new(comment_params.merge(booking_id:booking.id))
+   		if @comment.save
+			redirect_to root_path, notice:"Hiciste un comentario"
 		else
-			#render :index, status: :unprocessable_entity
-		end
+			render :new, status: :unprocessable_entity
+		end 
+		
 	end
 
 	def new
@@ -18,9 +19,9 @@ class CommentsController < ApplicationController
 
 	private
 
-	#def set_comment
-	#	@comment = Comment.find(params[:id])
-	#end
+	def set_comment
+		@comment = Comment.find(params[:id]) 
+	end
 
 	def comment_params
 		params.require(:comment).permit(:rating, :body)
