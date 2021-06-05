@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :chats, only: [:show]
   resources :bookings, only: [:index] do 
+    resources :comments, only: [:new, :create]
     collection do
      get :my_services_booking, as: :my_services
      post :create_reserve, as: :create_reserve
