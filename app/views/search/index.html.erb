@@ -18,7 +18,9 @@
 <% end %>
 
 <% @services.each do |service| %>
-  <%= link_to service.title, service_path(service, {start_date: params[:start_date]}), class:"btn btn-primary" %>
+  <%if current_user.id != service.user.id %>
+    <%= link_to service.title, service_path(service, {start_date: params[:start_date]}), class:"btn btn-primary" %>
+  <% end %>
   <%= service.region %>
   <%= service.comuna %>
 <% end %>
