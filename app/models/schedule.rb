@@ -11,16 +11,11 @@ class Schedule < ApplicationRecord
   end
 
   def start
-    now = self.day.to_datetime
-    hour = self.hour
-    DateTime.parse(now.strftime("%Y-%m-%dT#{hour}:00%z"))
+    DateTime.parse(self.start_date.strftime("%Y-%m-%dT%H:%M%z"))
   end
 
   def end
-    now = self.day.to_datetime
-    hour = self.hour.split(":").first.to_i + 1
-    hour = sprintf('%02d' ,hour) + ":00"
-    DateTime.parse(now.strftime("%Y-%m-%dT#{hour}:00%z"))
+    DateTime.parse((self.start_date+1.hour).strftime("%Y-%m-%dT%H:%M%z"))
   end
 
   def notification_message
