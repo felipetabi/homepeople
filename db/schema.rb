@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_024601) do
+ActiveRecord::Schema.define(version: 2021_06_08_022504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_024601) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "client_id", null: false
+    t.boolean "confirm_client", default: false
+    t.boolean "confirm_service", default: false
     t.integer "status", default: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -125,8 +127,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_024601) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "service_id", null: false
-    t.date "day"
-    t.string "hour"
+    t.datetime "start_date"
     t.index ["service_id"], name: "index_schedules_on_service_id"
   end
 
