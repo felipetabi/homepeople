@@ -17,7 +17,8 @@ class WorkingSetting < ApplicationRecord
         self.array_days.compact_blank.each do |day|
           if return_integer_day(day) == date.wday
             (array_hours.compact_blank).each do |hour|
-              service.schedules.create(day: date, hour: hour, price: self.hour_price, is_closed: false)
+              start_date = DateTime.parse(date.strftime("%Y-%m-%dT#{hour}:00%z"))
+              service.schedules.create(price: self.hour_price, is_closed: false, start_date: start_date)
             end
           end
 
