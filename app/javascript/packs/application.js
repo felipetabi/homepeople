@@ -11,6 +11,7 @@ import "@popperjs/core"
 import "bootstrap"
 import "controllers"
 import "../stylesheets/application"
+const images = require.context('../images', true)
 
 Rails.start()
 Turbolinks.start()
