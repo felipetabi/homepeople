@@ -10,4 +10,12 @@ class ChatsController < ApplicationController
       redirect_to root_path alert: "No permitido entrar a este chat"
     end
   end
+
+  def change_confirm
+    
+
+
+  end
+
+  
 end
