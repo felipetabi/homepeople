@@ -1,0 +1,53 @@
+<div class="author-page author vcard inline-items more">
+  <div class="author-thumb">
+    <%= image_pack_tag "media/images/author-page.webp", width: 36, height: 36, class:"avatar"  %>
+    <span class="icon-status online"></span>
+    <div class="more-dropdown more-with-triangle">
+      <div class="mCustomScrollbar" data-mcs-theme="dark">
+        <div class="ui-block-title ui-block-title-small">
+          <h6 class="title">Tu cuenta</h6>
+        </div>
+
+        <ul class="account-settings">
+          <li>
+            <%= link_to edit_user_registration_path do %>
+              <span>Editar Perfil</span>
+            <% end %>
+          </li>
+          <li>
+           <%= link_to destroy_user_session_path, method: :delete do %>
+              <span>Log Out</span>
+           <% end %>
+          </li>
+        </ul>
+
+        <div class="ui-block-title ui-block-title-small">
+          <h6 class="title">About Olympus</h6>
+        </div>
+
+        <ul>
+          <li>
+            <a href="#">
+              <span>Terms and Conditions</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>FAQs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Careers</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span>Contact</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

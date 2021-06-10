@@ -10,8 +10,8 @@
 
 				<a href="#" class="logo">
 					<div class="img-wrap">
-						<img loading="lazy" src="img/logo.webp" alt="Olympus" width="34" height="34">
-						<img loading="lazy" src="img/logo-colored-small.webp" width="34" height="34" alt="Olympus" class="logo-colored">
+            <%= image_pack_tag "media/images/logo.webp", width: 34, height: 34  %>
+            <%= image_pack_tag "media/images/logo-colored-small.webp", width: 34, height: 34, class:"logo-colored"  %>
 					</div>
 					<div class="title-block">
 						<h6 class="logo-title">olympus</h6>
@@ -27,53 +27,38 @@
 					<div class="mCustomScrollbar">
 						<ul>
 							<li class="nav-item">
-                <%= link_to "Home", root_path, class:"link-find-friend" %>
+                <%= link_to "Home", root_path, class:"nav-link" %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Buscar Servicio', search_path, class:"link-find-friend"%>
+                <%= link_to 'Buscar Servicio', search_path, class:"nav-link"%>
               </li>
               <% if !user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to 'Registro', new_user_registration_path, class:"link-find-friend"%>
+                  <%= link_to 'Registro', new_user_registration_path, class:"nav-link"%>
                 </li>
                 <li class="nav-item">
-                  <%= link_to 'Login', new_user_session_path, class:"link-find-friend"%>
+                  <%= link_to 'Login', new_user_session_path, class:"nav-link"%>
                 </li>
               <% else %>
                 <li class="nav-item">
-                  <%= link_to('Mis reservas', bookings_path, class:"link-find-friend") %>
+                  <%= link_to('Mis reservas', bookings_path, class:"nav-link") %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to('Peticiones de reservas', my_services_bookings_path, class:"link-find-friend") %>
+                  <%= link_to('Peticiones de reservas', my_services_bookings_path, class:"nav-link") %>
                 </li>
                 <li class="nav-item">
                   <%= link_to('Mi Servicio', services_path, class:"btn btn-primary") %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to('Logout', destroy_user_session_path, class:"link-find-friend", method: :delete) %>
-                </li>
-              <% end %>
-              <% if user_signed_in? %>
-                <li class="shoping-cart more">
-                  <a href="#" class="nav-link">
-                    <span class="count-product"><%= @user_notify.count %></span>
-                  </a>
-                  <div class="more-dropdown shop-popup-cart">
-                    <ul>
-                      <% @user_notify.each do |notify| %>
-                        <li class="cart-product-item">
-                          <div class="product-content">
-                            <h6 class="title"><%= notify.message %></h6>
-                          </div>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </div>
                 </li>
               <% end %>
 						</ul>
 					</div>
 				</div>
+        
+        <% if user_signed_in? %>
+          <%= render partial: 'commons/notification', locals: {user_notify: @user_notify} %>
+          <%= render partial: 'commons/nav_user', locals: {current_user: current_user} %>
+        <% end %>
+
 			</div>
 		</div>
 	</div>

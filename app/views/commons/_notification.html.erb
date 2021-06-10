@@ -1,0 +1,24 @@
+<div class="control-icon more has-items">
+  <div class="label-avatar bg-purple"><%= user_notify.count %></div>
+
+  <div class="more-dropdown more-with-triangle triangle-top-center">
+    <div class="ui-block-title ui-block-title-small">
+      <h6 class="title">Notificaciones</h6>
+    </div>
+
+    <div class="mCustomScrollbar" data-mcs-theme="dark">
+      <ul class="notification-list chat-message">
+        <% user_notify.each do |notify| %>
+          <li class="message-unread">
+            <div class="author-thumb">
+              <img loading="lazy" src="img/avatar59-sm.webp" alt="author" width="34" height="34">
+            </div>
+            <div class="notification-event">
+              <a href="#" class="h6 notification-friend"><%= notify.message %></a>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
