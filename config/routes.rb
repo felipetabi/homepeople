@@ -17,6 +17,13 @@ Rails.application.routes.draw do
       post "create-calendar", as: :create_calendar
     end
   end
+  resources :booking, only: [:create_reserve] do
+    resources :chats do
+     collection do
+        post "confirm-service" 
+      end
+    end
+  end
   get "search", to: "search#index"
   get "get-cities", to: "search#get_cities"
   get "get-cities", to: "service#get_cities"

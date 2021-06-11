@@ -11,10 +11,8 @@ class ChatsController < ApplicationController
     end
   end
 
-  def change_confirm
+  def confirm_service
     
-
-
   end
 
   

@@ -21,7 +21,7 @@
       Precio total: <%= @booking.price %>
     </p>
     <div>
-    <%= button_to "confirmar", method: :change_confirm%>
+    <%= link_to "confirmar", confirm_service_booking_chats_path(@booking.id), method: :post %>
     </div>
   </div>
   <div class="col-md-6">
