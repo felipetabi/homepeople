@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :services
   resources :categories
-  resources :chats, only: [:show]
+  resources :chats, only: [:show] do
+    post "confirm-service" 
+  end
   resources :bookings, only: [:index] do 
     resources :comments, only: [:new, :create]
     collection do
@@ -15,13 +17,6 @@ Rails.application.routes.draw do
   resources :schedules do
     collection do
       post "create-calendar", as: :create_calendar
-    end
-  end
-  resources :booking, only: [:create_reserve] do
-    resources :chats do
-     collection do
-        post "confirm-service" 
-      end
     end
   end
   get "search", to: "search#index"

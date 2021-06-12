@@ -1,8 +1,14 @@
-import { get } from "jquery";
 import { Controller } from "stimulus"
 
 
 export default class extends Controller {
+
+  connect(){
+    var element = document.getElementById("confirm_service");
+    element.addEventListener("ajax:success", (data) => {
+      console.log(data.detail[0])
+    });
+  }
   toggle(e){
     // debugger
     e.preventDefault();
@@ -27,5 +33,6 @@ export default class extends Controller {
     input.value = ""
     input.value = input_values
   }
+
 
 }

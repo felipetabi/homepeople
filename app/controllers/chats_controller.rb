@@ -12,7 +12,8 @@ class ChatsController < ApplicationController
   end
 
   def confirm_service
-    
+    æchat = Chat.find(params[:chat_id])
+    render json: {hola: "hola felipe"}
   end
 
   

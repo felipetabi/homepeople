@@ -20,8 +20,8 @@
     <p>
       Precio total: <%= @booking.price %>
     </p>
-    <div>
-    <%= link_to "confirmar", confirm_service_booking_chats_path(@booking.id), method: :post %>
+    <div data-controller="booking">
+    <%= link_to "confirmar", chat_confirm_service_path(@chat.id), method: :post, remote: true, id: "confirm_service"  %>
     </div>
   </div>
   <div class="col-md-6">
