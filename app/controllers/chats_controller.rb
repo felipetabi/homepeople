@@ -14,6 +14,9 @@ class ChatsController < ApplicationController
   def confirm_service
     æchat = Chat.find(params[:chat_id])
     render json: {hola: "hola felipe"}
+    #æchat = current_user.chat.booking(params(confirm_service:true))
+    booking = æchat.booking
+    booking = Booking.update(confirm_service: "true")
   end
 
   
