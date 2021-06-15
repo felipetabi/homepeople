@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2021_06_08_022504) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "client_id", null: false
+    t.boolean "confirm_client", default: false
+    t.boolean "confirm_service", default: false
     t.integer "status", default: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
