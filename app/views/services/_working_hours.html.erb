@@ -1,0 +1,48 @@
+<div class="col offset-md-3 col-xl-9 order-xl-2 col-lg-9 col-md-12 order-md-1 col-sm-12 col-12">
+  <div class="ui-block">
+    <div class="ui-block-title">
+      <h6 class="title"> Configure sus horas laborales</h6>
+    </div>
+
+    <div class="ui-block-content">
+      <%= form_for @working_settings do |form| %>
+        <div class="row">
+            <div class="col-sm-3">
+              <%= form.label "Trabajare desde", class:"form-label" %>
+              <%= form.date_field :start_date, class:"form-control", min: DateTime.now.strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
+              <%= form.label "Trabajare hasta", class:"form-label" %>
+              <%= form.date_field :end_date, class:"form-control", min: (DateTime.now+1.day).strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
+            </div>
+
+            <div class="col-sm-3">
+              Precio por hora
+              <%= form.number_field :hour_price, min: 1000, max: 1000000, class:"form-control" %>
+            </div>
+            <div class="col-sm-3">
+              <%= form.collection_check_boxes :array_hours, WorkingSetting.get_hours, :downcase, :to_s do |b| %>
+                <div class="form-check">
+                  <%= b.check_box(class:"form-check-input") %>
+                  <%= b.label(class:"form-check-label") %>
+                </div>
+              <% end %>
+            </div><!-- fin col-sm-6-->
+
+            <div class="col-sm-3">
+              <%= form.collection_check_boxes :array_days, WorkingSetting.get_days, :downcase, :to_s do |b| %>
+                <div class="form-check">
+                  <%= b.check_box(class:"form-check-input") %>
+                  <%= b.label(class:"form-check-label") %>
+                </div>
+              <% end %>
+            </div> <!-- fin col-sm-6-->
+          
+
+          
+            <%= form.submit "Crear Caledario", class:"btn btn-primary" %>
+          
+        </div>
+
+      <% end %> <!-- fin form_with-->
+    </div>
+  </div>
+</div>

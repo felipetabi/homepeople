@@ -17,18 +17,17 @@ class ServicesController < ApplicationController
     end
 
     def show
-      
       @service = Service.find(params[:id])
       @working_settings = @service.user.working_setting
       day = DateTime.now
-      @schedules = @service.schedules.left_outer_joins(:booking).where("start_date >= ? and is_closed = false", day).order(:start_date).group_by(&:start_date)
+      @schedules = @service.schedules.left_outer_joins(:booking).where("start_date >= ? and is_closed = false", day).order(:start_date).group(:id).group_by_day(&:start_date)
     end
+
     def get_cities
       if params[:region]
         comunas = CS.cities(params[:region], :cl)
         render json: comunas.to_json
       end
-  
     end
 
     def create
@@ -53,8 +52,6 @@ class ServicesController < ApplicationController
           render :index, status: :unprocessable_entity
       end
     end
-
-    
 
     private
 

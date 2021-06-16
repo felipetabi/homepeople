@@ -39,11 +39,13 @@
 
   </div>
 </div>
-<% if current_user.id != @service.user.id %>
 <div class="row">
-  <%= form_with url: create_reserve_bookings_path, method: :post do |f| %>
-    <%= f.hidden_field :schedule_ids %>
-    <%= f.submit "Reservar", disable_with: 'Reservando...', class:"btn btn-primary" %>
+  <% if user_signed_in? %>
+    <% if current_user.id != @service.user.id %>
+      <%= form_with url: create_reserve_bookings_path, method: :post do |f| %>
+        <%= f.hidden_field :schedule_ids %>
+        <%= f.submit "Reservar", disable_with: 'Reservando...', class:"btn btn-primary" %>
+      <% end %>
+    <% end %>
   <% end %>
-<% end %>
 </div>
