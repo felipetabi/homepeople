@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :chats, only: [:show] do
     post "confirm-service" 
+    post "confirm-client"
   end
   resources :bookings, only: [:index] do 
     resources :comments, only: [:new, :create]
