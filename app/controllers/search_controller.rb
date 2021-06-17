@@ -3,7 +3,7 @@ class SearchController < ApplicationController
 	def index
 		@categories = Category.all
 		query = {region: params[:region], comuna: params[:comuna]}
-		@services = Service.joins(:categories).where(query).where(categories: {id: params[:category_ids]}).distinct
+		@services = Service.joins(:categories, user: [:working_setting]).where(query).where(categories: {id: params[:category_ids]}).distinct
 
 		if params[:start_date]
 			start_date = params[:start_date].to_date

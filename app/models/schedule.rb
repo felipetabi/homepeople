@@ -1,5 +1,5 @@
 class Schedule < ApplicationRecord
-  has_one :booking_schedule
+  has_one :booking_schedule, dependent: :destroy
   has_one :booking, through: :booking_schedule, dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
   belongs_to :service

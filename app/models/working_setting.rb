@@ -27,7 +27,7 @@ class WorkingSetting < ApplicationRecord
   end
 
   def update_schedules
-    self.user.service.schedules.left_outer_joins(:bookings).destroy_all
+    self.user.service.schedules.left_outer_joins(:booking).destroy_all
     create_schedules
   end
 
