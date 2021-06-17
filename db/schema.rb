@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_224757) do
+ActiveRecord::Schema.define(version: 2021_06_08_022504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_224757) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "client_id", null: false
+    t.boolean "confirm_client", default: false
+    t.boolean "confirm_service", default: false
     t.integer "status", default: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -85,6 +87,17 @@ ActiveRecord::Schema.define(version: 2021_05_31_224757) do
     t.index ["client_id", "service_client_id"], name: "index_chats_on_client_id_and_service_client_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.float "rating", default: 0.0
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_comments_on_booking_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.text "body"
@@ -114,8 +127,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_224757) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "service_id", null: false
-    t.date "day"
-    t.string "hour"
+    t.datetime "start_date"
     t.index ["service_id"], name: "index_schedules_on_service_id"
   end
 
@@ -166,6 +178,8 @@ ActiveRecord::Schema.define(version: 2021_05_31_224757) do
   add_foreign_key "booking_schedules", "schedules"
   add_foreign_key "bookings", "services"
   add_foreign_key "chats", "bookings"
+  add_foreign_key "comments", "bookings"
+  add_foreign_key "comments", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "schedules", "services"
   add_foreign_key "services", "users"

@@ -10,4 +10,21 @@ class ChatsController < ApplicationController
       redirect_to root_path alert: "No permitido entrar a este chat"
     end
   end
+
+  def confirm_service
+    @chat = Chat.find(params[:chat_id])
+    booking = @chat.booking
+    booking = Booking.update(confirm_service: "true")
+    render json: {hola: "hola felipe"}
+  end
+
+  def confirm_client
+    @chat = Chat.find(params[:chat_id])
+    booking = @chat.booking
+    booking = Booking.update(confirm_client: "true")
+    render json: {hola: "hola felipe"}
+
+  end
+
+  
 end

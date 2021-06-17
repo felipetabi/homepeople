@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :services
   resources :categories
-  resources :chats, only: [:show]
+  resources :chats, only: [:show] do
+    post "confirm-service" 
+    post "confirm-client"
+  end
   resources :bookings, only: [:index] do 
+    resources :comments, only: [:new, :create]
     collection do
      get :my_services_booking, as: :my_services
      post :create_reserve, as: :create_reserve

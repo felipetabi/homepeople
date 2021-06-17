@@ -17,7 +17,8 @@ class WorkingSetting < ApplicationRecord
         self.array_days.compact_blank.each do |day|
           if return_integer_day(day) == date.wday
             (array_hours.compact_blank).each do |hour|
-              service.schedules.create(day: date, hour: hour, price: self.hour_price, is_closed: false)
+              start_date = DateTime.parse(date.strftime("%Y-%m-%dT#{hour}:00%z"))
+              service.schedules.create(price: self.hour_price, is_closed: false, start_date: start_date)
             end
           end
 
@@ -26,7 +27,7 @@ class WorkingSetting < ApplicationRecord
   end
 
   def update_schedules
-    self.user.service.schedules.left_outer_joins(:bookings).destroy_all
+    self.user.service.schedules.left_outer_joins(:booking).destroy_all
     create_schedules
   end
 

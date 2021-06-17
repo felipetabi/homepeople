@@ -11,7 +11,7 @@
       <% @booking.schedules.each do |schedule| %>
         <li>
           <p>
-            Fecha: <%= schedule.day %>  - Hora: <%= schedule.day %>
+            Fecha: <%= schedule.start_date %>
           </p>
         </li>
       <% end %>
@@ -20,6 +20,13 @@
     <p>
       Precio total: <%= @booking.price %>
     </p>
+    <div data-controller="booking">
+    <% if current_user.id == @chat.booking.client_id && @chat.booking.confirm_service == false %>
+      <%= link_to "confirmar", chat_confirm_service_path(@chat.id), method: :post, remote: true, id: "confirm_service"  %>
+    <% elsif current_user.id == @chat.booking.service.user_id && @chat.booking.confirm_client == false %>
+      <%= link_to "Confirmar", chat_confirm_client_path(@chat.id), method: :post, remote: true, id: "confirm_client" %>
+    <% end %>
+    </div>
   </div>
   <div class="col-md-6">
     <div class="col-inside-lg decor-default">

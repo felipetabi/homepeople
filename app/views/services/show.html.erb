@@ -29,7 +29,7 @@
         <% @schedules.each do |date, arr_schedules| %>
           <td >
             <% arr_schedules.each do |schedule| %>
-              <%= link_to "#{schedule.hour}", "#", class:"btn btn-primary", data:{ action: "booking#toggle", value: schedule.id} %> <br><br>
+              <%= link_to "#{schedule.start_date.strftime("%H:%M")}", "#", class:"btn btn-primary", data:{ action: "booking#toggle", value: schedule.id} %> <br><br>
             <% end %>
           </td>
         <% end %>
@@ -40,8 +40,14 @@
   </div>
 </div>
 <div class="row">
-  <%= form_with url: create_reserve_bookings_path, method: :post do |f| %>
-    <%= f.hidden_field :schedule_ids %>
-    <%= f.submit "Reservar", disable_with: 'Reservando...', class:"btn btn-primary" %>
+  <% if user_signed_in? %>
+    <% if current_user.id != @service.user.id %>
+      <%= form_with url: create_reserve_bookings_path, method: :post do |f| %>
+        <%= f.hidden_field :schedule_ids %>
+        <%= f.submit "Reservar", disable_with: 'Reservando...', class:"btn btn-primary" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to "Reservar",  new_user_registration_path, class:"btn btn-primary" %>
   <% end %>
 </div>
