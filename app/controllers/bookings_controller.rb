@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   end
 
   def my_services_booking
-    if current_user.role == 1
+    if current_user.role == 0
       @my_services_booking = current_user.service.schedules.joins(:booking)  
     else
       redirect_to root_path, alert: "No tienes servicios reservados"
