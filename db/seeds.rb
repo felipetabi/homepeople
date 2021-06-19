@@ -12,7 +12,7 @@ c = Category.create(name: "Una categoría")
 
 c2 = Category.create(name: "Segunda categoría")
 
-service = Service.create(title: "Servicio", description: "Una descripción", region: "CO", comuna: "Coquimbo", user_id: u.id)
+service = Service.create( description: "Una descripción", region: "CO", comuna: "Coquimbo", user_id: u.id)
 
 service.categories << c
 service.categories << c2

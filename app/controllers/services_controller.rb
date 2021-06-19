@@ -46,6 +46,12 @@ class ServicesController < ApplicationController
       @categories = Category.all
       @service = current_user.service || current_user.build_service
       @service = current_user.service
+      @cities = CS.states(:cl).map{|key, value| [value, key]}
+      if !current_user.service.id.nil?
+        @comunas = CS.cities(current_user.service.region, :cl)
+      else
+        @comunas = []
+      end
       if @service.update(service_params)
           redirect_to services_path, notice: "Haz actualizado el servicio"
       else
@@ -60,6 +66,7 @@ class ServicesController < ApplicationController
     end
 
     def service_params
-      params.require(:service).permit(:title, :description, :region, :comuna, category_ids:[], certificates: [])
+      params.require(:service).permit(:description, :region, :comuna, :last_job, :start_date_last_job, :end_date_last_job, :description_last_job, :address_last_job, categories_last_job:[], category_ids:[], certificates: [])
     end
+
 end
