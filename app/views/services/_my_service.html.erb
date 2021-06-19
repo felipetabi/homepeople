@@ -20,10 +20,16 @@
           <% end %>
 
         </div>
-
         <div class="form-group label-floating">
-          <%= f.label :title, class:"control-label" %>
-          <%= f.text_field :title, autofocus: true, autocomplete: "title", class:"form-control" %>
+          <%= f.collection_check_boxes :category_ids, categories, :id, :name do |block|  %>
+            <div class="checkbox">
+              <%= block.label do |b| %>
+                <%= block.check_box %>
+                <span class="checkbox-material"><span class="check"></span></span>
+              <% end %>
+              <%= block.label { block.object.name }  %>
+            </div>
+          <% end %>
         </div>
 
         <div class="form-group label-floating">
@@ -41,17 +47,6 @@
           <%= f.select :comuna, comunas, {:prompt => "--select comuna--"}  %>
         </div>
 
-        <div class="form-group label-floating">
-          <%= f.collection_check_boxes :category_ids, categories, :id, :name do |block|  %>
-            <div class="checkbox">
-              <%= block.label do |b| %>
-                <%= block.check_box %>
-                <span class="checkbox-material"><span class="check"></span></span>
-              <% end %>
-              <%= block.label { block.object.name }  %>
-            </div>
-          <% end %>
-        </div>
 
 
         <div class="form-group label-floating">
