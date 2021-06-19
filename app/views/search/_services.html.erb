@@ -1,0 +1,18 @@
+<% services.each do |service| %>
+  <div class="photo-album-item-wrap col-4-width">
+    <div class="photo-album-item">
+      <div class="photo-item">
+        <%= image_pack_tag "media/images/photo-item1.webp", width: 577, height: 283  %>
+      </div>
+
+      <div class="content">
+        <%= link_to service.title, service_path(service, {start_date: params[:start_date]}), class:"title h5" %>
+        <span class="sub-title"><%= service.comuna %></span>
+      </div>
+
+    </div>
+  </div>
+
+  
+  
+<% end %>

@@ -1,0 +1,70 @@
+<div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+  <div class="ui-block">
+    <div class="ui-block-title">
+      <h6 class="title">Ingrese un servicio</h6>
+    </div>
+    <div class="ui-block-content">
+      <!-- Personal Information Form  -->
+      <%= form_for service do |f| %>
+        <div class="row">
+          <% if service.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
+
+              <ul>
+                <% @service.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :title, class:"control-label" %>
+          <%= f.text_field :title, autofocus: true, autocomplete: "title", class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :description, class:"control-label"  %>
+          <%= f.text_area :description, class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating" data-controller="service">
+          <%= f.label :region, class:"control-label" %>
+          <%= f.select :region, cities, {:prompt => "Seleccione una Región"}, data: {action: "click->service#funcion"} %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :comuna, class:"control-label" %>
+          <%= f.select :comuna, comunas, {:prompt => "--select comuna--"}  %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.collection_check_boxes :category_ids, categories, :id, :name do |block|  %>
+            <div class="checkbox">
+              <%= block.label do |b| %>
+                <%= block.check_box %>
+                <span class="checkbox-material"><span class="check"></span></span>
+              <% end %>
+              <%= block.label { block.object.name }  %>
+            </div>
+          <% end %>
+        </div>
+
+
+        <div class="form-group label-floating">
+            <%= f.file_field :certificates, multiple: true ,class:"control-label" %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Ingresar Servicio", class:"btn btn-primary" %>
+        </div>
+
+      <% end %>
+
+      <!-- ... end Personal Information Form  -->
+    </div>
+  </div>
+</div>

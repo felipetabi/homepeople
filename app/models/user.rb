@@ -28,4 +28,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :photo
+
+  has_one :service, dependent: :destroy
+  has_one :working_setting, dependent: :destroy
+  has_many :bookings, foreign_key: "client_id", dependent: :destroy
+  # has_many :client_chats, foreign_key: "client_id", dependent: :destroy
+  has_many :notifications, as: :notificable, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+
+  def full_name
+    self.first_name + " " + self.last_name
+  end
+  
 end

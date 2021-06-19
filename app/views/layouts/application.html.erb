@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
-  <body>
-    <% if !user_signed_in? %>
-      <%= link_to 'Login', new_user_session_path, class:"waves-effect waves-light btn-large"%>
-      <%= link_to 'Registro', new_user_registration_path, class:"waves-effect waves-light btn-large"%>
-    <% else %>
-      <%= link_to('Logout', destroy_user_session_path, class:"waves-effect waves-light btn-large", method: :delete) %>        
-    <% end %>
+  <body class="body-bg-white">
 
-    <% if notice %>
-      <p class="notice alert_primary"><%= notice %></p>
-    <%end%>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <%end%>
-    <%= yield %>
+    <%= render "commons/navegation" %>
+    <%= render "commons/messages" %>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <%= render "commons/footer" %>
+    <script> (function(a, b, c, d, e, f, g) { c[d] = c[d] || function() { (c[d].q = c[d].q || []).push(arguments); }; c['_lsAlias'] = c[d]; e = a.createElement(b); e.type = 'text/javascript'; e.async = true; e.src = 'https://app.chatsupport.co/api/client/get/script/LS-00e8f3e7'; f = function() { g = a.getElementsByTagName(b)[0]; g.parentNode.insertBefore(e, g); }; c.addEventListener('load', f); })(document, 'script', window, '_ls'); _ls('init', { 'projectId': 'LS-00e8f3e7' }); </script>
   </body>
 </html>

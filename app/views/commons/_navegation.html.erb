@@ -1,0 +1,72 @@
+<!-- Stunning header -->
+
+<div class="stunning-header bg-primary-opacity">
+
+
+	<!-- Header Standard Landing  -->
+	<div class="header--standard header--standard-landing" id="header--standard">
+		<div class="container">
+			<div class="header--standard-wrap">
+
+				<a href="#" class="logo">
+					<div class="img-wrap">
+            <%= image_pack_tag "media/images/logo.webp", width: 34, height: 34  %>
+            <%= image_pack_tag "media/images/logo-colored-small.webp", width: 34, height: 34, class:"logo-colored"  %>
+					</div>
+					<div class="title-block">
+						<h6 class="logo-title">olympus</h6>
+						<div class="sub-title">SOCIAL NETWORK</div>
+					</div>
+				</a>
+
+				<a href="#" class="open-responsive-menu js-open-responsive-menu">
+					<svg class="olymp-menu-icon"><use xlink:href="#olymp-menu-icon"></use></svg>
+				</a>
+
+				<div class="nav nav-pills nav1 header-menu expanded-menu">
+					<div class="mCustomScrollbar">
+						<ul>
+							<li class="nav-item">
+                <%= link_to "Home", root_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Buscar Servicio', search_path, class:"nav-link"%>
+              </li>
+              <% if !user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to 'Registro', new_user_registration_path, class:"nav-link"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Login', new_user_session_path, class:"nav-link"%>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to('Mis reservas', bookings_path, class:"nav-link") %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to('Peticiones de reservas', my_services_bookings_path, class:"nav-link") %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to('Mi Servicio', services_path, class:"btn btn-primary") %>
+                </li>
+              <% end %>
+						</ul>
+					</div>
+				</div>
+        
+        <% if user_signed_in? %>
+          <%= render partial: 'commons/notification', locals: {user_notify: @user_notify} %>
+          <%= render partial: 'commons/nav_user', locals: {current_user: current_user} %>
+        <% end %>
+
+			</div>
+		</div>
+	</div>
+	<!-- ... end Header Standard Landing  -->
+</div>
+
+<!-- End Stunning header -->
+
+
+
+

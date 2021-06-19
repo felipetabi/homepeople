@@ -1,0 +1,9 @@
+
+<div class="row">
+  <%= render 'commons/profile_menu' %>
+  <%= render partial: 'my_service', locals:{service: @service, categories: @categories, comunas: @comunas, cities: @cities} %>
+  <% if !@current_user_have_service.nil? %>
+    <%= render partial: 'working_hours', locals:{working_settings: @working_settings} %>
+  <% end %>
+</div>
+

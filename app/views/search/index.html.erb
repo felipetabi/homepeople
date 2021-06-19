@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="ui-block responsive-flex">
+      <div class="ui-block-title">
+        <%= form_with(url: search_path, method: :get, class: 'navbar-form navbar-left') do |f| %>
+          <div class="input-group" data-controller="search">
+
+            <fieldset class="form-group">
+              <%= f.select :region, @cities, {:prompt => "Selecciona una Region"}, data: {action: "click->search#funcion"}, class:"form-select", required: true %>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <%= f.select :comuna, [], {:prompt => "--Comuna--"}, class:"form-select", required: true %>
+            </fieldset>
+
+            <div class="form-group date-time-picker">
+              <%= f.date_field :start_date, class: "form-control", value: DateTime.now.strftime("%Y-%m-%d"), min: DateTime.now.strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d"), required: true %>
+            </div>
+
+            <div class="form-group date-time-picker">
+              <%= f.date_field :end_date, class: "form-control", min: (DateTime.now+1.day).strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
+            </div>
+            <div class="checkbox clicked">
+              <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |block|  %>
+                <%= block.label do |b| %>
+                  <%= b.object %>
+                  <%= block.check_box %>
+                  <span class="checkbox-material"><span class="check"></span></span>
+                <% end %>
+                <%= block.label { block.object.name }  %>
+              <% end %>
+            </div>
+
+            <div class="input-group-btn">
+              <%= button_tag "Buscar servicio", :class => 'btn btn-primary',:name => nil%>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="tab-content">
+      <div id="album-page" >
+        <div class="photo-album-wrapper">
+          <%= render partial: "services", locals:{ services: @services} %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
