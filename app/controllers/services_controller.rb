@@ -66,7 +66,8 @@ class ServicesController < ApplicationController
     end
 
     def service_params
-      params.require(:service).permit(:description, :region, :comuna, :last_job, :start_date_last_job, :end_date_last_job, :description_last_job, :address_last_job, categories_last_job:[], category_ids:[], certificates: [])
+      params.require(:service).permit(:description, :region, :comuna, :last_job, :start_date_last_job, :end_date_last_job,
+                                      :description_last_job, :address_last_job, categories_last_job:[], category_ids:[], certificates: [])
     end
 
 end
