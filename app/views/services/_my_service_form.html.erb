@@ -1,7 +1,7 @@
 <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
   <div class="ui-block">
     <div class="ui-block-title">
-      <h6 class="title">Ingrese un servicio</h6>
+      <h3 class="title">Ingrese un servicio</h3>
     </div>
     <div class="ui-block-content">
       <!-- Personal Information Form  -->
@@ -20,6 +20,11 @@
           <% end %>
 
         </div>
+
+        <div class="crumina-module crumina-heading with-title-decoration">
+          <h5 class="heading-title">Información sobre el servicio que ofreces </h5>
+        </div>
+
         <div class="form-group label-floating">
           <%= f.collection_check_boxes :category_ids, categories, :id, :name do |block|  %>
             <div class="checkbox">
@@ -47,14 +52,54 @@
           <%= f.select :comuna, comunas, {:prompt => "--select comuna--"}  %>
         </div>
 
-
-
         <div class="form-group label-floating">
-            <%= f.file_field :certificates, multiple: true ,class:"control-label" %>
+          <%= f.file_field :certificates, multiple: true ,class:"control-label" %>
         </div>
 
+        <div class="crumina-module crumina-heading with-title-decoration">
+          <h5 class="heading-title">Descripción de tu ultima experiencia laborar </h5>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :last_job, class:"control-label"  %>
+          <%= f.text_field :last_job, class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.collection_check_boxes :categories_last_job, categories, :name, :name do |block|  %>
+            <div class="checkbox">
+              <%= block.label do |b| %>
+                <%= block.check_box %>
+                <span class="checkbox-material"><span class="check"></span></span>
+              <% end %>
+              <%= block.label { block.object.name }  %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :start_date_last_job, class:"control-label"  %>
+          <%= f.date_field :start_date_last_job, class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :end_date_last_job, class:"control-label"  %>
+          <%= f.date_field :end_date_last_job, class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :description_last_job, class:"control-label"  %>
+          <%= f.text_area :description_last_job, class:"form-control" %>
+        </div>
+
+        <div class="form-group label-floating">
+          <%= f.label :address_last_job, class:"control-label"  %>
+          <%= f.text_field :address_last_job, class:"form-control" %>
+        </div>
+
+
         <div class="actions">
-          <%= f.submit "Ingresar Servicio", class:"btn btn-primary" %>
+          <%= f.submit "Ingresar Servicio", class:"btn btn-md btn-primary" %>
         </div>
 
       <% end %>
