@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'payment/exito'
   root to: "home#index"
   devise_for :users
   resources :services
