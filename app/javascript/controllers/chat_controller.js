@@ -2,30 +2,38 @@ import { Controller } from 'stimulus';
 import consumer from '../channels/consumer';
 
 export default class extends Controller {
-  static targets = ['input', 'messages'];
+  static targets = ['booking'];
 
   connect() {
-    this.channel = consumer.subscriptions.create('ChatChannel', {
-      connected: this._cableConnected.bind(this),
-      disconnected: this._cableDisconnected.bind(this),
-      received: this._cableReceived.bind(this),
-    });
+
+    var scroll = document.getElementById("chat_booking");
+    scroll.scrollTop = scroll.scrollHeight;
+
+    this.channel = consumer.subscriptions.create(
+    {
+      channel: "ChatChannel",
+      booking_id: this.bookingTarget.dataset.booking,
+    },
+    {
+      connected: this._connected.bind(this),
+      disconnected: this._disconnected.bind(this),
+      received: this._received.bind(this),
+    }
+
+    );
   }
 
-  clearInput() {
-    this.inputTarget.value = '';
+  _connected() {}
+
+  _disconnected() {}
+
+  _received(data) {
+    document.getElementById("message_body").value = ""
+    const element = this.bookingTarget
+    element.innerHTML = data
+    var scroll = document.getElementById("chat_booking");
+    scroll.scrollTop = scroll.scrollHeight;
+
   }
 
-  _cableConnected() {
-    // Called when the subscription is ready for use on the server
-  }
-
-  _cableDisconnected() {
-    // Called when the subscription has been terminated by the server
-  }
-
-  _cableReceived(data) {
-    // Called when there's incoming data on the websocket for this channel
-    this.messagesTarget.innerHTML += data.message;
-  }
 }

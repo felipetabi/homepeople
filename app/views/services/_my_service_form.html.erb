@@ -24,7 +24,6 @@
         <div class="crumina-module crumina-heading with-title-decoration">
           <h5 class="heading-title">Información sobre el servicio que ofreces </h5>
         </div>
-
         <div class="form-group label-floating">
           <%= f.collection_check_boxes :category_ids, categories, :id, :name do |block|  %>
             <div class="checkbox">
@@ -37,20 +36,26 @@
           <% end %>
         </div>
 
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group label-floating" data-controller="service">
+              <%= f.label :region, class:"control-label" %>
+              <%= f.select :region, cities, {:prompt => "Seleccione una Región"}, data: {action: "click->service#funcion"} %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group label-floating">
+              <%= f.label :comuna, class:"control-label" %>
+              <%= f.select :comuna, comunas, {:prompt => "--select comuna--"}  %>
+            </div>
+          </div>
+        </div>
+
         <div class="form-group label-floating">
           <%= f.label :description, class:"control-label"  %>
           <%= f.text_area :description, class:"form-control" %>
         </div>
 
-        <div class="form-group label-floating" data-controller="service">
-          <%= f.label :region, class:"control-label" %>
-          <%= f.select :region, cities, {:prompt => "Seleccione una Región"}, data: {action: "click->service#funcion"} %>
-        </div>
-
-        <div class="form-group label-floating">
-          <%= f.label :comuna, class:"control-label" %>
-          <%= f.select :comuna, comunas, {:prompt => "--select comuna--"}  %>
-        </div>
 
         <div class="form-group label-floating">
           <%= f.file_field :certificates, multiple: true ,class:"control-label" %>
@@ -76,15 +81,19 @@
             </div>
           <% end %>
         </div>
-
-        <div class="form-group label-floating">
-          <%= f.label :start_date_last_job, class:"control-label"  %>
-          <%= f.date_field :start_date_last_job, class:"form-control" %>
-        </div>
-
-        <div class="form-group label-floating">
-          <%= f.label :end_date_last_job, class:"control-label"  %>
-          <%= f.date_field :end_date_last_job, class:"form-control" %>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group label-floating">
+              <%= f.label :start_date_last_job, class:"control-label"  %>
+              <%= f.date_field :start_date_last_job, class:"form-control" %>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <div class="form-group label-floating">
+              <%= f.label :end_date_last_job, class:"control-label"  %>
+              <%= f.date_field :end_date_last_job, class:"form-control" %>
+            </div>
+          </div>
         </div>
 
         <div class="form-group label-floating">

@@ -1,0 +1,19 @@
+ <li class='<%= current_user == message.sender ?  "d-flex justify-content-end" : "d-flex justify-content-start" %>' >
+  <% if current_user != message.sender %>
+    <div class="author-thumb">
+      <%= image_pack_tag "media/images/avatar10-sm.webp", width: 36, height: 36 %>
+    </div>
+  <% end %>
+  <div class="notification-event">
+    <div class="event-info-wrap">
+      <span href="#" class="h6 notification-friend"><%= message.sender.full_name %></span>
+      <span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18"><%= message.created_at %></time></span>
+    </div>
+    <span class="chat-messageage-item"><%= message.body.html_safe %></span>
+  </div>
+  <% if current_user == message.sender %>
+    <div class="author-thumb">
+      <%= image_pack_tag "media/images/avatar10-sm.webp", width: 36, height: 36 %>
+    </div>
+  <% end %>
+</li>

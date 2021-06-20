@@ -6,13 +6,13 @@
       </div>
 
       <div class="content">
-        <%= link_to service.title, service_path(service, {start_date: params[:start_date]}), class:"title h5" %>
-        <span class="sub-title"><%= service.comuna %></span>
+        <%= link_to service.user.full_name, service_path(service, {start_date: params[:start_date]}), class:"title h5" %>
+        <span class="title h6"><%= service.categories_text %></span>
+        <span class="title h6">Comuna: <%= service.comuna %></span>
+        <span class="title h6">Región: <%= region(service.region) %></span>
+        <span class="sub-title">Comentarios: 0</span>
       </div>
 
     </div>
   </div>
-
-  
-  
 <% end %>

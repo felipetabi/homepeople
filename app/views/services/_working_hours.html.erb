@@ -7,33 +7,42 @@
     <div class="ui-block-content">
       <%= form_for @working_settings do |form| %>
         <div class="row">
-            <div class="col-sm-12 col-md-3">
-              <%= form.label "Trabajare desde", class:"form-label" %>
-              <%= form.date_field :start_date, class:"form-control", min: DateTime.now.strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
-              <%= form.label "Trabajare hasta", class:"form-label" %>
-              <%= form.date_field :end_date, class:"form-control", min: (DateTime.now+1.day).strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
-            </div>
 
-            <div class="col-sm-12 col-md-3">
-              Precio por hora
-              <%= form.number_field :hour_price, min: 1000, max: 1000000, class:"form-control", required: true %>
-            </div>
-
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
               <div class="form-group label-floating">
-                <%= form.collection_check_boxes :array_hours, WorkingSetting.get_hours, :downcase, :to_s do |block| %>
-                  <div class="checkbox">
-                    <%= block.label do |b| %>
-                      <%= block.check_box %>
-                      <span class="checkbox-material"><span class="check"></span></span>
-                    <% end %>
-                    <%= block.label %>
-                  </div>
-                <% end %>
+                <%= form.label "Trabajare desde", class:"control-label" %>
+                <%= form.date_field :start_date, class:"form-control", min: DateTime.now.strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
+              </div>
+              <div class="form-group label-floating">
+                <%= form.label "Trabajare hasta", class:"control-label" %>
+                <%= form.date_field :end_date, class:"form-control", min: (DateTime.now+1.day).strftime("%y-%m-%d"), max: (DateTime.now+1.year).strftime("%y-%m-%d") %>
+              </div>
+              <div class="form-group label-floating">
+                <%= form.label "Precio por hora", class:"control-label" %> 
+                <%= form.number_field :hour_price, min: 1000, max: 1000000, class:"form-control", required: true %>
+              </div>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+              <div class="form-group label-floating">
+                <div class="row">
+                  <%= form.collection_check_boxes :array_hours, WorkingSetting.get_hours, :downcase, :to_s do |block| %>
+                    <div class="col-sm-12 col-md-4">
+                      <div class="checkbox">
+                        <%= block.label do |b| %>
+                          <%= block.check_box %>
+                          <span class="checkbox-material"><span class="check"></span></span>
+                        <% end %>
+                        <%= pm_or_am(block) %>
+                        <%# block.label.methods  %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div><!-- fin col-sm-6-->
 
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
               <div class="form-group label-floating">
                 <%= form.collection_check_boxes :array_days, WorkingSetting.get_days, :downcase, :to_s do |block| %>
                   <div class="checkbox">
