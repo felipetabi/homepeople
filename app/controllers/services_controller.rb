@@ -4,7 +4,6 @@ class ServicesController < ApplicationController
 
 
     def index
-      console
       @categories = Category.all
       @service = current_user.service || current_user.build_service
       @current_user_have_service = Service.find_by_user_id(current_user.id)
