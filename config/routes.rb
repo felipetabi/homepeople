@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   get 'payment/exito'
   root to: "home#index"
   devise_for :users
