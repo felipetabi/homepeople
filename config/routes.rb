@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
   get 'payment/exito'
   root to: "home#index"
+
   devise_for :users
+  namespace :admin do
+    root 'dashboard#index'
+  end
   resources :services
   resources :categories
   resources :bookings, only: [:index] do 

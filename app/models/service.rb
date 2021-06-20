@@ -1,4 +1,5 @@
 class Service < ApplicationRecord
+  is_impressionable
 
   has_many :schedules, dependent: :destroy
   has_many_attached :certificates, dependent: :destroy

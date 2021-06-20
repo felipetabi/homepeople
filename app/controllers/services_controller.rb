@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
     before_action :authenticate_user!, except: [:show]
+    impressionist :actions=>[:show]
 
 
 
@@ -21,6 +22,7 @@ class ServicesController < ApplicationController
       @working_settings = @service.user.working_setting
       day = DateTime.now
       @schedules = @service.schedules.left_outer_joins(:booking).where("start_date >= ? and is_closed = false", day).order(:start_date).group(:id).group_by_day(&:start_date)
+      impressionist(@service)
     end
 
     def get_cities

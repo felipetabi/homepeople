@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :photo
 
-  enum role: %w{user service_client, admin}
+  enum role: [:user, :service_client, :admin]
 
 
   def full_name
