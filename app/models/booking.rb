@@ -7,6 +7,12 @@ class Booking < ApplicationRecord
   belongs_to :client, class_name: "User", foreign_key: "client_id"
   belongs_to :service
 
+  delegate  :description, :region,:comuna, :last_job, :start_date_last_job,
+            :end_date_last_job, :description_last_job, :categories_text,
+            :address_last_job, to: :service, prefix: true
+
+  delegate :email, :full_name , :role, to: :client, prefix: true
+
   after_commit :create_a_chat
 
   def create_a_chat

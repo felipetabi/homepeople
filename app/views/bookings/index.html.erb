@@ -22,10 +22,10 @@
         <% @my_bookings.each do |booking| %>
           <tr>
             <td><%= booking.status %></td>
-            <td><%= booking.service.categories_text %></td>
-            <td><%= booking.service.description %></td>
-            <td><%= booking.service.region %></td>
-            <td><%= booking.service.comuna %></td>
+            <td><%= booking.service_categories_text %></td>
+            <td><%= booking.service_description %></td>
+            <td><%= booking.service_region %></td>
+            <td><%= booking.service_comuna %></td>
             <td><%= booking.price %></td>
             <td><%= booking.schedules.map{|schedule| "#{schedule.start_date.strftime("%D")} - #{schedule.start_date.strftime("%H:%M")}" }.join( " | " ) %></td>
             <td><%= link_to "Ir al chat", booking_chat_path(booking, booking.chat) %></td>
