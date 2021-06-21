@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'admin', media: 'all' %>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
 
   <body>
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
+    <%= render 'admin/common/left_tab_menu' %>
     <%= render 'admin/common/top_bar' %>
     <div class="page-wrapper">
       <div class="page-content">
         <div class="container-fluid">
+          <%= render 'admin/common/title_page' %>
           <%= yield %>
         </div>
       </div>

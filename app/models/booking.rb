@@ -6,7 +6,7 @@ class Booking < ApplicationRecord
   has_one :comment, dependent: :destroy
   belongs_to :client, class_name: "User", foreign_key: "client_id"
   belongs_to :service
-
+  enum status: [:open, :pending, :cancel, :acepted]
   delegate  :description, :region,:comuna, :last_job, :start_date_last_job,
             :end_date_last_job, :description_last_job, :categories_text,
             :address_last_job, to: :service, prefix: true

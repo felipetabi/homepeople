@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mt-0">Usuarios Registrados</h4>
+        <div class="table-responsive-sm">
+          <table class="table mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th scole="col">ID</th>
+                <th scole="col">Nombre</th>
+                <th scole="col">Email</th>
+                <th scole="col">Fecha de Nacimiento</th>
+                <th scole="col">Rol</th>
+                <th scole="col">Telefono</th>
+                <th scole="col">Servicio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <th scope="row"><%= user.id %></th>
+                  <td><%= user.full_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.birthday %></td>
+                  <td><span class="badge badge-md badge-soft-purple"><%= user.role %></span></td>
+                  <td><%= user.phone %></td>
+                  <td><%= user.service ? user.service.categories_text : "Sin Servicio" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  paginates_per 50
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -12,7 +13,6 @@ class User < ApplicationRecord
   has_one_attached :photo
 
   enum role: [:user, :service_client, :admin]
-
 
   def full_name
     self.first_name + " " + self.last_name
