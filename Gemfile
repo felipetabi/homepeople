@@ -26,6 +26,8 @@ gem 'city-state'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+gem 'sendgrid-ruby'
+
 gem 'annotate'
 
 # Reduces boot times through caching; required in config/boot.rb
