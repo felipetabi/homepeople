@@ -7,7 +7,6 @@ export default class extends Controller {
     var element = document.getElementById("confirm_service");
     element.addEventListener("ajax:success", (data) => {
       console.log(data.detail[0])
-      style.display = 'none';
     });
   }
   toggle(e){
@@ -37,3 +36,7 @@ export default class extends Controller {
 
 
 }
+
+
+
+
