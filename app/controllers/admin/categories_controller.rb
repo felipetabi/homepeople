@@ -1,9 +1,9 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < AdminApplicationController
     before_action :authenticate_user!
-    before_action :is_admin?
+    add_breadcrumb "Categories", :admin_categories_path
 
     def index
-        @categories = Category.all
+        @categories = Category.order(created_at: :desc).all
     end
 
     def new
@@ -12,12 +12,13 @@ class CategoriesController < ApplicationController
 
     def edit
         @category = Category.find(params[:id])
+        add_breadcrumb "Edit Categories", admin_category_path(@category)
     end
 
     def create
         @category = Category.new(categories_params)
         if @category.save
-            redirect_to categories_url, notice: "Haz creado una categoría"
+            redirect_to admin_categories_url, notice: "Haz creado una categoría"
         else
             render :new, status: :unprocessable_entity
         end
@@ -27,7 +28,7 @@ class CategoriesController < ApplicationController
         @category = Category.find(params[:id])
 
         if @category.update(categories_params)
-            redirect_to categories_url, notice: "Haz actualizado una categoría"
+            redirect_to admin_categories_url, notice: "Haz actualizado una categoría"
         else
             render :edit, status: :unprocessable_entity
         end
@@ -36,7 +37,7 @@ class CategoriesController < ApplicationController
     def destroy
         @category = Category.find(params[:id])
         @category.destroy
-        redirect_to categories_path, notice: "Haz eliminado una categoria"
+        redirect_to admin_categories_path, notice: "Haz eliminado una categoria"
     end
     
 

@@ -6,12 +6,14 @@ class Booking < ApplicationRecord
   has_one :comment, dependent: :destroy
   belongs_to :client, class_name: "User", foreign_key: "client_id"
   belongs_to :service
+  has_one :user, through: :service
   enum status: [:open, :pending, :cancel, :acepted]
-  delegate  :description, :region,:comuna, :last_job, :start_date_last_job,
+  delegate  :description, :region, :comuna, :last_job, :start_date_last_job,
             :end_date_last_job, :description_last_job, :categories_text,
             :address_last_job, to: :service, prefix: true
 
   delegate :email, :full_name , :role, to: :client, prefix: true
+  delegate :email, :full_name , :role, to: :user, prefix: true
 
   after_commit :create_a_chat
 

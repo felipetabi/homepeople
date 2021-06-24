@@ -7,9 +7,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'dashboard#index'
     resources :users
+    resources :categories
+    resources :services
   end
   resources :services
-  resources :categories
   resources :bookings, only: [:index] do 
     resources :chats, only: [:show] do
       resources :messages, only: [:create]

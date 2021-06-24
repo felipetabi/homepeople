@@ -1,5 +1,5 @@
 <div class="col-md-4 offset-md-4">
-  <%= form_for category do |f| %>
+  <%= form_for [:admin, category] do |f| %>
     <% if category.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>

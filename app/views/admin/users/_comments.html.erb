@@ -1,0 +1,16 @@
+<h4 class="title mt-0 mb-3"> <strong>Promedio de comentarios emitidos</strong> <%= comments.average_comments %></h4>
+<div class="main-timeline mt-3">
+  <% comments.each do |comment| %>
+    <div class="timeline">
+      <span class="timeline-icon"></span>
+      <span class="year"> <strong>Rating: </strong> <%= comment.rating %> </span>
+      <div class="timeline-content">
+        <h5 class="title">Servicio de <%= link_to comment.service.user.full_name, admin_user_path(comment.service.user) %> Reserva: <%= comment.booking %></h5>
+        <span class="post"><% comment.created_at %></span>
+        <p class="description">
+            <%= comment.body %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

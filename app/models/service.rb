@@ -7,10 +7,13 @@ class Service < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :categories
 
+  delegate :full_name, :rol, :email, to: :user, prefix: true
+
   validates :description, :region, :last_job, :start_date_last_job, :end_date_last_job, :description_last_job, :categories_last_job, presence: true
   validate :correct_document_mime_type
 
   after_save :change_user_role
+
 
 
   def correct_document_mime_type

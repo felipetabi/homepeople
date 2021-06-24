@@ -7,11 +7,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "@popperjs/core"
-import "bootstrap"
-import "controllers"
-import "../stylesheets/application"
-const images = require.context('../images', true)
+import "admin_controllers"
 
 
 

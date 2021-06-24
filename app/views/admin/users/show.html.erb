@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <% if @user.service_client? && @user.service %>
+          <h4 class="title mt-0">Información de servicio</h4>
+          <%= render partial:"service", locals: {service: @user.service}  %>
+        <% elsif  @user.user? %>
+          <%= render partial:"basic_user_profile", locals: {user: @user}  %>
+        <% end %>
+      </div>
+    </div>
+    <% if !@bookings.empty? %>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="title mt-0">Reservas realizadas por el <%= @user.full_name %></h4>
+            <%= render partial:'bookings', locals:{bookings: @bookings} %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if !@services_booking.empty?  %>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="title mt-0">Reservas realizadas a los servicios de <%= @user.full_name %></h4>
+            <%= render partial:'services_booking', locals:{services_booking: @services_booking} %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="col-lg-6">
+    <% if !@emit_comments.empty? %>
+      <div class="card">
+        <div class="card-body">
+          <%= render partial: 'comments', locals:{comments: @emit_comments} %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @user.working_setting %>
+      <div class="card">
+        <div class="card-body">
+          <div data-controller="calendar">
+            <h4 class="title mt-0">Calendario laboral</h4>
+              <%= render partial: 'working_settings', locals:{working_setting: @user.working_setting } %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>

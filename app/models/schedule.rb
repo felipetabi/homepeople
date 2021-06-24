@@ -7,7 +7,7 @@ class Schedule < ApplicationRecord
   after_create :notification_message
 
   def title
-    "Servicio #{self.service.title}"
+    "Servicio #{self.service.categories_text}"
   end
 
   def start
