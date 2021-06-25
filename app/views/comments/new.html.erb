@@ -1,13 +1,59 @@
-<%= form_with model: ([@booking, @comment]) do |f|%>
-<h2>deja tu comentario</h2>
-	<div class="field">	
-		<br>
-		<%= f.text_area :body, size: "60x10" %><br>
-		<%= f.number_field :rating %>
-	</div>
+<div>
+	<h2>
+			<%= @booking.service_categories_text %>
+	</h2>
+	<p>
+		<%= @booking.service_description %>
+	</p>
+	<ul>
+		<% @booking.schedules.each do |schedule| %>
+			<li>
+				<p>
+					Fecha: <%= schedule.start_date %>
+				</p>
+			</li>
+		<% end %>
+	</ul>
+	<hr>
+	<p>
+		Precio total: <%= @booking.price %>
+	</p>
 
-	<div class="actions">
-		<%= f.submit %>
-	</div>
+</div>
+<div class="" data-controller="comments">
+	<%= form_with model: ([@booking, @comment]) do |f|%>
+		<h2>deja tu comentario</h2>
+		<div class="field">	
+			<br>
+			<%= f.text_area :body, size: "60x10" %><br>
+			<%= f.hidden_field :rating, value: 1, data:{target:"comments.input_rating"} %>
+		</div>
 
-<% end %>
+		<div class="rating-container d-block">
+			<% 10.times do |n| %>
+					<a href="#" class="font-white d-inline-block rating <%= get_color_rating(n) %> <%= 'rating-active' if n+1 == 1 %>" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip on top" data-value="<%= n+1 %>" data-comments-target="rating" data-action="click->comments#select_rating">
+						<%= n + 1 %>
+					</a>
+			<% end %>
+		</div>
+
+		<div class="guide">
+			<ul>
+				<li>
+					<span class="font-white d-inline-block rating bg-danger"> <i class="fas fa-frown"></i></span> Malo
+				</li>
+				<li>
+					<span class="font-white d-inline-block rating bg-warning"> <i class="far fa-meh"></i> </span> Bueno
+				</li>
+				<li>
+					<span class="font-white d-inline-block rating bg-green"> <i class="fas fa-smile-beam"></i></span> Muy Bueno
+				</li>
+			</ul>
+		</div>
+
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+
+	<% end %>
+</div>

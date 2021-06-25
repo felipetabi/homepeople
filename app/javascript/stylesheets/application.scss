@@ -1,2 +1,23 @@
 @import "bootstrap";
 @import "main";
+.hidden{
+  display: none;
+}
+.rating{
+  font-size: 1.5em;
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 100%;
+  text-align: center;
+  text-decoration: none;
+  border: white 2px solid;
+  &:hover{
+    color: white;
+  }
+}
+.font-white {
+  color:white;
+}
+.rating-active{
+  border:royalblue 2px solid;
+}

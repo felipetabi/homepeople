@@ -15,12 +15,14 @@ class Booking < ApplicationRecord
   delegate :email, :full_name , :role, to: :client, prefix: true
   delegate :email, :full_name , :role, to: :user, prefix: true
 
-  after_commit :create_a_chat
+  after_create :create_a_chat
 
   def create_a_chat
-    self.create_chat(client_id: self.client_id, service_client_id: self.service.user.id)
-    notify = self.notifications.create(message:"Te han realizado una reserva", state: false, sender_id: self.client_id, receiver_id: self.service.user.id)
-    ActionCable.server.broadcast("user_#{self.service.user.id}", { message: notify.message })
+    if self.chat.nil?
+      self.chat.create(client_id: self.client_id, service_client_id: self.service.user.id)
+      notify = self.notifications.create(message:"Te han realizado una reserva", state: false, sender_id: self.client_id, receiver_id: self.service.user.id)
+      ActionCable.server.broadcast("user_#{self.service.user.id}", { message: notify.message })
+    end
   end
 
 end

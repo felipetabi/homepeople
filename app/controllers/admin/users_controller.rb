@@ -9,7 +9,8 @@ class Admin::UsersController < AdminApplicationController
   def show
     @bookings = @user.bookings.includes(:chat)
     @services_booking = Booking.includes(:chat).where(service: @user.service)
-    @emit_comments = @user.comments.includes( booking: [:service] )
+    @emit_comments = @user.comments.includes( booking: [:service])
+    @comments_booking = Comment.where(booking_id: @services_booking.pluck(:id))
   end
 
   def edit

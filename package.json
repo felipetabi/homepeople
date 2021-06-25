@@ -2,6 +2,7 @@
   "name": "homepeople",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@fullcalendar/core": "^5.7.0",
     "@fullcalendar/daygrid": "^5.7.0",
     "@fullcalendar/list": "^5.7.0",

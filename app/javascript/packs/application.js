@@ -11,6 +11,7 @@ import "@popperjs/core"
 import "bootstrap"
 import "controllers"
 import "../stylesheets/application"
+import "@fortawesome/fontawesome-free/css/all"
 const images = require.context('../images', true)
 
 

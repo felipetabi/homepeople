@@ -1,4 +1,5 @@
-<h4 class="title mt-0 mb-3"> <strong>Promedio de comentarios emitidos</strong> <%= comments.average_comments %></h4>
+<h4 class="title mt-0 mb-3"> <strong>Promedio de comentarios <%= title %></strong> <%= comments.average_comments %></h4>
+<h6 class="title mt-0 mb-3"> <strong>Cantidad de comentarios <%= title %></strong> <%= comments.count %></h6>
 <div class="main-timeline mt-3">
   <% comments.each do |comment| %>
     <div class="timeline">

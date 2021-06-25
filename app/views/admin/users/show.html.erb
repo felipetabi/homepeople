@@ -33,7 +33,15 @@
     <% if !@emit_comments.empty? %>
       <div class="card">
         <div class="card-body">
-          <%= render partial: 'comments', locals:{comments: @emit_comments} %>
+          <%= render partial: 'comments', locals:{comments: @emit_comments, title: "emitidos"} %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if !@comments_booking.empty? %>
+      <div class="card">
+        <div class="card-body">
+          <%= render partial: 'comments', locals:{comments: @comments_booking, title: "recibidos"} %>
         </div>
       </div>
     <% end %>

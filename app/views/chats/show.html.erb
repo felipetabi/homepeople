@@ -6,7 +6,6 @@
     <p>
       <%= @booking.service_description %>
     </p>
-    
     <ul>
       <% @booking.schedules.each do |schedule| %>
         <li>
@@ -20,13 +19,15 @@
     <p>
       Precio total: <%= @booking.price %>
     </p>
+
     <div data-controller="booking">
     <% if current_user.id == @booking.client_id && @booking.confirm_service == false %>
-      <%= link_to "confirmar", booking_chat_confirm_service_path(@booking, @chat.id), method: :post, remote: true, id: "confirm_service"  %>
-    <% elsif current_user.id == @chat.booking.service.user_id && @chat.booking.confirm_client == false %>
-      <%= link_to "Confirmar", booking_chat_confirm_client_path(@booking, @chat.id), method: :post, remote: true, id: "confirm_client" %>
+      <%= link_to "Confirmar Reserva", booking_chat_confirm_service_path(@booking, @chat.id), method: :post, remote: true, id: "confirm_service", class:"btn btn-primary btn-sm", data:{ action:"click->booking#click_ajax"} %>
+    <% elsif current_user.id == @booking.service.user_id && @booking.confirm_client == false %>
+      <%= link_to "Confirmar Reserva", booking_chat_confirm_client_path(@booking, @chat.id), method: :post, remote: true, id: "confirm_client", class:"btn btn-primary btn-sm", data:{ action:"click->booking#click_ajax"} %>
     <% end %>
     </div>
+
   </div>
   <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-12 col-6">
     <div class="ui-block mb-0">
