@@ -1,7 +1,7 @@
 <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
   <div class="ui-block">
     <div class="ui-block-title">
-      <h3 class="title">Ingrese un servicio</h3>
+      <h3 class="title">Ingrese un servicio  </h3>
     </div>
     <div class="ui-block-content">
       <!-- Personal Information Form  -->
@@ -56,10 +56,51 @@
           <%= f.text_area :description, class:"form-control" %>
         </div>
 
+        <div class="row">
+        <div class="col-md-12">
+          <h5 class="title"><%= service.is_verified? ? "Servicio Verificado" : "Este servicio no esta verificado" %></h5>
+          <p>
+            Para ser un servicio verificado debes subir el certificado de antecedentes, puedes obtenerlo <a target="_blank" href="https://www.registrocivil.cl/principal/servicios-en-linea/certificado-de-antecedentes"> <strong>acá</strong> </a> 
+          </p>
 
-        <div class="form-group label-floating">
-          <%= f.file_field :certificates, multiple: true ,class:"control-label" %>
+          <div class="form-group label-floating">
+            <div class="file-upload text-center">
+              <label for="service_background_paper" class="file-upload__label bg-blue"><i class="fas fa-file-pdf"></i> <i class="fas fa-file-word"></i> Certificador de antecedentes</label>
+              <%= f.file_field :background_paper, class:"form-control", class:"file-upload__input" %>
+            </div>
+          </div>
+
         </div>
+
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group label-floating">
+              <div class="file-upload text-center">
+                <label for="service_certificates" class="file-upload__label bg-breez"><i class="fas fa-file-pdf"></i> <i class="fas fa-file-word"></i> Certificados acá</label>
+                <%= f.file_field :certificates, class:"form-control", class:"file-upload__input" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group label-floating">
+              <div class="file-upload text-center">
+                <label for="service_pcr_paper" class="file-upload__label"><i class="fas fa-file-pdf"></i> <i class="fas fa-file-word"></i> Antecedente de PCR</label>
+                <%= f.file_field :pcr_paper, class:"form-control", class:"file-upload__input" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4">
+            <div class="form-group label-floating">
+              <div class="file-upload text-center">
+                <label for="service_mobility_pass" class="file-upload__label bg-green"><i class="fas fa-file-pdf"></i> <i class="fas fa-file-word"></i> Pase de Movilidad</label>
+                <%= f.file_field :mobility_pass, class:"form-control", class:"file-upload__input" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
 
         <div class="crumina-module crumina-heading with-title-decoration">
           <h5 class="heading-title">Descripción de tu ultima experiencia laborar </h5>

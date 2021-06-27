@@ -3,6 +3,12 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.action_mailer.delivery_method = :sendgrid_actionmailer
+  config.action_mailer.sendgrid_actionmailer_settings = {
+    api_key: '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',
+    raise_delivery_errors: true
+  }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

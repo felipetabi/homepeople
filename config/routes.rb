@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
-  get 'payment/exito'
   root to: "home#index"
 
   devise_for :users
@@ -19,8 +18,8 @@ Rails.application.routes.draw do
     end
     resources :comments, only: [:new, :create]
     collection do
-     get :my_services_booking, as: :my_services
-     post :create_reserve, as: :create_reserve
+      get :my_services_booking, as: :my_services
+      post :create_reserve, as: :create_reserve
     end
   end
   resources :working_settings, only: [:create, :update]
@@ -32,5 +31,7 @@ Rails.application.routes.draw do
   get "search", to: "search#index"
   get "get-cities", to: "search#get_cities"
   get "get-cities", to: "service#get_cities"
+  get 'payment/service-success', to: "payment#service_success"
+  get 'payment/search-success', to: "payment#service_success"
 
 end

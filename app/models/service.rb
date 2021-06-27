@@ -2,10 +2,13 @@ class Service < ApplicationRecord
   is_impressionable
 
   has_many :schedules, dependent: :destroy
-  has_many_attached :certificates, dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
   belongs_to :user
   has_and_belongs_to_many :categories
+  has_many_attached :certificates, dependent: :destroy
+  has_one_attached :pcr_paper, dependent: :destroy
+  has_one_attached :background_paper, dependent: :destroy
+  has_one_attached :mobility_pass, dependent: :destroy
 
   delegate :full_name, :rol, :email, to: :user, prefix: true
 

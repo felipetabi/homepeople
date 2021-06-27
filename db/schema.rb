@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_232148) do
+ActiveRecord::Schema.define(version: 2021_06_27_033409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,24 @@ ActiveRecord::Schema.define(version: 2021_06_20_232148) do
     t.index ["notificable_type", "notificable_id"], name: "index_notifications_on_notificable"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.datetime "expired_at"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "kind", default: 0
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.datetime "expired_at"
+    t.bigint "user_id", null: false
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.integer "price"
     t.boolean "is_closed"
@@ -170,6 +188,7 @@ ActiveRecord::Schema.define(version: 2021_06_20_232148) do
     t.text "description_last_job"
     t.string "categories_last_job", default: [], array: true
     t.string "address_last_job"
+    t.boolean "is_verified", default: false
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
@@ -187,6 +206,8 @@ ActiveRecord::Schema.define(version: 2021_06_20_232148) do
     t.boolean "terms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender", default: 0
+    t.boolean "is_connected", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -212,6 +233,8 @@ ActiveRecord::Schema.define(version: 2021_06_20_232148) do
   add_foreign_key "comments", "bookings"
   add_foreign_key "comments", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "payments", "users"
+  add_foreign_key "plans", "users"
   add_foreign_key "schedules", "services"
   add_foreign_key "services", "users"
 end

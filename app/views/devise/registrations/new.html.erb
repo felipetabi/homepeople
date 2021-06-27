@@ -4,11 +4,15 @@
     <!-- Tab panes -->
     <div class="tab-content" id="registration-form-tabs-content2">
       <div class="tab-pane fade show active" id="login2" role="tabpanel" aria-labelledby="login2-tab">
-        <div class="title h6">Register to Olympus</div>
+        <div class="title h6">Registrate en Kaffidy</div>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{ class:"content"})  do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="row">
+            <div class="file-upload text-center">
+              <label for="upload" class="file-upload__label bg-breez">Subir Avatar</label>
+              <%= f.file_field :photo, class:"form-control", class:"file-upload__input" %>
+            </div>
             <div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
               <div class="form-group label-floating">
                 <%= f.label :first_name, class:"control-label"  %>
@@ -38,8 +42,11 @@
                 <%= f.date_field :birthday, class:"form-control" %>
               </div>
 
-              <div>
-                <%= f.file_field :photo, class:"form-control" %>
+              <div class="form-group label-floating">
+                <label class="control-label">Genero</label>
+                <fieldset class="form-group">
+                  <%= f.select(:gender, User.genders.collect {|p| [ p[0], p[1] ] }, { include_blank: false, class:"form-select" }) %>
+                </fieldset>
               </div>
 
               <div class="form-group label-floating">

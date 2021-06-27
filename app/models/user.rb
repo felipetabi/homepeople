@@ -10,12 +10,18 @@ class User < ApplicationRecord
   # has_many :client_chats, foreign_key: "client_id", dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :payments, dependent: :destroy
   has_one_attached :photo
 
   enum role: [:user, :service_client, :admin]
+  enum gender: [:masculino, :femenino]
 
   def full_name
     self.first_name + " " + self.last_name
+  end
+
+  def check_if_payments?
+    !self.payments.empty? && self.payments.check_expired_at?
   end
 
 end

@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     # binding.pry
     if @message.save
 
-      partial = ApplicationController.render(partial: @chat.messages, locals:{current_user: current_user})
+      partial = ApplicationController.render(partial: @chat.messages, locals:{current_user: @chat.service_client})
       ActionCable.server.broadcast("chat_channel_#{@booking.id}", partial)
 
       # ChatChannel.broadcast_to("chat_channel_#{@booking.id}", {

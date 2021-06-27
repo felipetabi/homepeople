@@ -20,7 +20,7 @@
               <% @users.each do |user| %>
                 <tr>
                   <th scope="row"><%= user.id %></th>
-                  <td><%= user.full_name %></td>
+                  <td><%= link_to user.full_name, admin_user_path(user) %></td>
                   <td><%= user.email %></td>
                   <td><%= user.birthday %></td>
                   <td><span class="badge badge-md badge-soft-purple"><%= user.role %></span></td>
