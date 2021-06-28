@@ -1,0 +1,40 @@
+version: "3.6"
+
+x-build: &x-build
+  context: .
+  dockerfile: Dockerfile
+
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./prod_docker/nginx/Dockerfile
+    env_file: ./prod_docker/.env
+    ports:
+      - 80:80
+    depends_on:
+      - kaffidy
+
+  redis:
+    image: redis:alpine
+
+  db:
+    image: postgres:alpine
+    volumes:
+      - db-data:/var/lib/postgresql
+    env_file: .env
+
+  kaffidy:
+    build: *x-build
+    image: kaffidy
+    command: bash -c "bundle exec puma -C config/puma.rb"
+    volumes:
+      - .:/home/app/webapp
+    depends_on:
+      - db
+      - redis
+    env_file: .env
+
+volumes:
+  db-data:

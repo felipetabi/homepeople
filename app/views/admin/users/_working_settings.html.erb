@@ -1,0 +1,20 @@
+<ul>
+  <li>
+    <strong>Dias de Trabajo</strong>
+    <% @user.working_setting.array_days.reject!(&:empty?).each do |day| %>
+      <span class="badge badge-lg bg-success"><%= day %></span>
+    <% end %>
+  </li>
+  <li>
+    <strong>Horas Trabajadas</strong>
+    <% @user.working_setting.array_hours.reject!(&:empty?).each do |hour| %>
+      <span class="badge badge-lg bg-primary"><%= hour %></span>
+    <% end %>
+  </li>
+  <li>
+    <strong>Precio por hora</strong>
+    <%= @user.working_setting.hour_price %>
+  </li>
+</ul>
+
+<div id='calendar' data-calendar-target="calendar" data-user_id="<%= @user.id%>"></div>

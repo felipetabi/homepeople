@@ -1,0 +1,24 @@
+<div class="table-responsive-sm">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th scole="col">ID Booking</th>
+        <th scole="col">Fecha Reserva</th>
+        <th scole="col">Estado de la Reserva</th>
+        <th scole="col">Fecha de Nacimiento</th>
+        <th scole="col">Rol</th>
+        <th scole="col">Telefono</th>
+        <th scole="col">Servicio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% services_booking.each do |booking| %>
+        <tr>
+          <th scope="row"><%= booking.id %></th>
+          <td><%= booking.client_full_name %></td>
+          <td><%= booking.user_full_name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

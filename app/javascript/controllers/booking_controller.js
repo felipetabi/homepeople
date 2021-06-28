@@ -3,12 +3,18 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
 
-  connect(){
-    var element = document.getElementById("confirm_service");
+
+  click_ajax(e){
+    e.preventDefault();
+    var element = e.target;
     element.addEventListener("ajax:success", (data) => {
-      console.log(data.detail[0])
+      if (data.detail[0].response) {
+        element.classList.add("hidden")
+      }
+
     });
   }
+
   toggle(e){
     // debugger
     e.preventDefault();

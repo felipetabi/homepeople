@@ -1,15 +1,22 @@
 class Service < ApplicationRecord
+  is_impressionable
 
   has_many :schedules, dependent: :destroy
-  has_many_attached :certificates, dependent: :destroy
   has_many :notifications, as: :notificable, dependent: :destroy
   belongs_to :user
   has_and_belongs_to_many :categories
+  has_many_attached :certificates, dependent: :destroy
+  has_one_attached :pcr_paper, dependent: :destroy
+  has_one_attached :background_paper, dependent: :destroy
+  has_one_attached :mobility_pass, dependent: :destroy
+
+  delegate :full_name, :rol, :email, to: :user, prefix: true
 
   validates :description, :region, :last_job, :start_date_last_job, :end_date_last_job, :description_last_job, :categories_last_job, presence: true
   validate :correct_document_mime_type
 
   after_save :change_user_role
+
 
 
   def correct_document_mime_type

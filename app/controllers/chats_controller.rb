@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_chat, except: [:show]
 
   def show
     @chat = Chat.find(params[:id])
@@ -12,18 +13,19 @@ class ChatsController < ApplicationController
   end
 
   def confirm_service
-    @chat = Chat.find(params[:chat_id])
-    booking = @chat.booking
-    booking = Booking.update(confirm_service: "true")
-    render json: {hola: "hola felipe"}
+    @chat.booking.update(confirm_service: true)
+    render json: {response: true}
   end
 
   def confirm_client
-    @chat = Chat.find(params[:chat_id])
-    booking = @chat.booking
-    booking = Booking.update(confirm_client: "true")
-    render json: {hola: "hola felipe"}
+    @chat.booking.update(confirm_client: true)
+    render json: {response: true}
+  end
 
+  private
+
+  def set_chat
+    @chat = Chat.find(params[:chat_id])
   end
 
 end

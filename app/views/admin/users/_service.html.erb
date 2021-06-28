@@ -1,0 +1,26 @@
+<div class="text-center">
+  <%= image_tag "user-4.jpg", class:"rounded-circle user-img img-thumbnail" %>
+  <h4 class="team-leader"><%= @user.full_name %></h4>
+    <ul class="list-inline language-skill mb-4">
+      <li class="list-inline-item">Categorias en las que trabaja: </li>
+      <% service.categories_text.split(", ").each do |category| %>
+        <li class="list-inline-item"><span> <%= category %></span></li>
+      <% end %>
+    </ul>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <p> <strong>Descripción: </strong> <%= service.description %></p>
+    <p> <strong>Region: </strong> <%= region(service.region) %></p>
+    <p> <strong>Comuna: </strong> <%= service.comuna %></p>
+  </div>
+  <div class="col-md-6">
+    <p> <strong>Ultimo Trabajo: </strong> <%= service.last_job %></p>
+    <p> <strong>Inicio del ultimo trabajo: </strong> <%= service.start_date_last_job %></p>
+    <p> <strong>Fin del ultimo trabajo: </strong> <%= service.end_date_last_job %></p>
+    <p> <strong>Descripcion del ultimo trabajo </strong> <%= service.description_last_job %></p>
+    <p> <strong>Categorias del ultimo trabajo</strong> <%= service.categories_last_job.reject!(&:empty?).join(", ") %></p>
+    <p> <strong>Direccion del ultimo trabajo: </strong> <%= service.address_last_job %></p>
+  </div>
+</div>
+

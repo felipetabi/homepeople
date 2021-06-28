@@ -12,10 +12,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @my_services_booking.each do |schedule| %>
+        <% @my_services_booking.each do |booking| %>
           <tr>
-            <th scope="row"><%= schedule.service.title %></th>
-            <td>Mark</td>
+            <th scope="row"><%= booking.service_categories_text %></th>
+            <td><%= link_to "Ir al chat", booking_chat_url(booking, booking.chat) %></td>
           </tr>
         <% end %>
       </tbody>

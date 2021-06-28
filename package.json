@@ -2,6 +2,7 @@
   "name": "homepeople",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@fullcalendar/core": "^5.7.0",
     "@fullcalendar/daygrid": "^5.7.0",
     "@fullcalendar/list": "^5.7.0",
@@ -14,6 +15,7 @@
     "bootstrap": "^5.0.0-beta3",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
+    "rating": "^0.1.0",
     "stimulus": "^2.0.0",
     "turbolinks": "^5.2.0"
   },

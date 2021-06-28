@@ -3,7 +3,6 @@ import consumer from "./consumer"
 consumer.subscriptions.create("NotifyChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
-    console.log("asd")
   },
 
   disconnected() {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_220221) do
+ActiveRecord::Schema.define(version: 2021_06_27_033409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,32 @@ ActiveRecord::Schema.define(version: 2021_06_19_220221) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "impressions", force: :cascade do |t|
+    t.string "impressionable_type"
+    t.integer "impressionable_id"
+    t.integer "user_id"
+    t.string "controller_name"
+    t.string "action_name"
+    t.string "view_name"
+    t.string "request_hash"
+    t.string "ip_address"
+    t.string "session_hash"
+    t.text "message"
+    t.text "referrer"
+    t.text "params"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
+    t.index ["user_id"], name: "index_impressions_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.bigint "chat_id", null: false
     t.text "body"
@@ -119,6 +145,24 @@ ActiveRecord::Schema.define(version: 2021_06_19_220221) do
     t.integer "sender_id", null: false
     t.integer "receiver_id", null: false
     t.index ["notificable_type", "notificable_id"], name: "index_notifications_on_notificable"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.datetime "expired_at"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "kind", default: 0
+    t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.datetime "expired_at"
+    t.bigint "user_id", null: false
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -144,6 +188,7 @@ ActiveRecord::Schema.define(version: 2021_06_19_220221) do
     t.text "description_last_job"
     t.string "categories_last_job", default: [], array: true
     t.string "address_last_job"
+    t.boolean "is_verified", default: false
     t.index ["user_id"], name: "index_services_on_user_id"
   end
 
@@ -161,6 +206,8 @@ ActiveRecord::Schema.define(version: 2021_06_19_220221) do
     t.boolean "terms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "gender", default: 0
+    t.boolean "is_connected", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -186,6 +233,8 @@ ActiveRecord::Schema.define(version: 2021_06_19_220221) do
   add_foreign_key "comments", "bookings"
   add_foreign_key "comments", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "payments", "users"
+  add_foreign_key "plans", "users"
   add_foreign_key "schedules", "services"
   add_foreign_key "services", "users"
 end

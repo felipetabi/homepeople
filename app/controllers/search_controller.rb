@@ -11,10 +11,10 @@ class SearchController < ApplicationController
 			range_dates = params[:start_date]..params[:start_date]
 			@services.joins(:schedules).where(schedules: {is_closed: false, start_date: start_date..end_date })
 		end
-		
+
 		@cities = CS.states(:cl).map{|key, value| [value, key]}
 	end
-	
+
 
 	def get_cities
 		if params[:region]

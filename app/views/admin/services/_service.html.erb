@@ -1,0 +1,7 @@
+<tr>
+  <td scope="row"><%= service.id %></td>
+  <td> <%= service.description %> </td>
+  <td> <%= region(service.region) %> </td>
+  <td> <%= service.comuna %> </td>
+  <td><%= link_to service.user_full_name, admin_user_url(service.user), class: "btn btn-warning" %></td>
+</tr>
